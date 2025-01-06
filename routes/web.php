@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\WelcomeController;
 
@@ -20,5 +21,15 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::get('/logout', function() {
+    Auth::logout();
+    return redirect('/login');
+})->name('/logout');
+
+Route::get('/login', function() {
+    return view('auth.login');
+})->name('login');
+
 
 require __DIR__.'/auth.php';

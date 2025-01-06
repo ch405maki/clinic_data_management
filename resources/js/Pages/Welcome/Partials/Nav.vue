@@ -2,11 +2,11 @@
     <Head title="Welcome" />
     <!-- Navbar -->
     <nav class="bg-white border-gray-200 border-b-2 shadow-lg">
-      <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+      <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-2">
         <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
           <img src="/images/logo.png" class="h-12" alt="KSU Dental Clinic Logo" />
           <div class="flex flex-col">
-            <span class="self-start sm:text-2xl font-semibold">KSU Dental Clinic</span>
+            <span class="self-start sm:text-xl font-semibold">KSU Dental Clinic</span>
             <span class="self-start text-sm text-gray-500">Purok 6, Bulanao Tabuk City, Kalinga</span>
           </div>
         </a>
@@ -14,7 +14,7 @@
         <button
           data-collapse-toggle="navbar-default"
           type="button"
-          class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
+          class="inline-flex items-center p-2 w-8 h-8 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
           aria-controls="navbar-default"
           aria-expanded="false"
         >
@@ -65,7 +65,7 @@
             <template v-if="navigation.canLogin">
               <li v-if="$page.props.auth.user" class="flex">
                 <Link
-                  :href="route('admin.dashboard')"
+                  :href="route('dashboard')"
                   class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 dark:text-white"
                 >
                   Dashboard

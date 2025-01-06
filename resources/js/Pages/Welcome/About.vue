@@ -240,7 +240,7 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
 import { ref, onMounted } from 'vue';
-import Footer from './Partials/Footer.vue';
+import Footer from '../../Layouts/Footer.vue';
 import Nav from './Partials/Nav.vue';
 
 
