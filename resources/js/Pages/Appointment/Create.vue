@@ -3,7 +3,17 @@
 
     <AuthenticatedLayout>
         <div class="max-w-7xl mx-auto py-4 px-4 mb-4 mx-10 sm:px-6 lg:px-8 rounded-lg bg-white shadow">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Doctors Availability</h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Make Appointment</h2>
+        </div>
+        <div class="max-w-7xl">
+          <div class="bg-red-200 px-10 py-4 mt-6 rounded-md text-lg flex items-center mx-auto max-w-full ">
+          <svg viewBox="0 0 24 24" class="text-red-600 w-5 h-5 sm:w-5 sm:h-5 mr-3">
+              <path fill="currentColor"
+                  d="M12,0A12,12,0,1,0,24,12,12.013,12.013,0,0,0,12,0Zm.25,5a1.5,1.5,0,1,1-1.5,1.5A1.5,1.5,0,0,1,12.25,5ZM14.5,18.5h-4a1,1,0,0,1,0-2h.75a.25.25,0,0,0,.25-.25v-4.5a.25.25,0,0,0-.25-.25H10.5a1,1,0,0,1,0-2h1a2,2,0,0,1,2,2v4.75a.25.25,0,0,0,.25.25h.75a1,1,0,1,1,0,2Z">
+              </path>
+          </svg>
+          <span class="text-red-800 text-sm sm:text-base"> You Can Only Make Appointments Within Available Date and Hours. </span>
+          </div>
         </div>
         <div class="flex flex-col min-h-screen bg-gray-100">
             <main class="flex-grow">
@@ -26,20 +36,18 @@
                                             </thead>
                                             <tbody class="divide-y divide-gray-300">
                                             <!-- Check if there are any availability slots -->
-                                            <template v-if="availability.length > 0">
+                                            <template>
                                                 <tr 
                                                     class="bg-white transition-all duration-500 hover:bg-gray-50" 
-                                                    v-for="slot in availability" 
-                                                    :key="slot.id"
                                                 >
                                                     <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900">
-                                                        Doc. {{ slot.doctor.lname }}, {{ slot.doctor.name }}
+                                                        Data
                                                     </td>
                                                     <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900">
-                                                        {{ formatDate(slot.date) }}
+                                                        Data
                                                     </td>
                                                     <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900">
-                                                        {{ formatTime(slot.start_time) }} - {{ formatTime(slot.end_time) }}
+                                                        Data
                                                     </td>
                                                     <td class="p-5">
                                                         <div class="flex items-center gap-1">
@@ -56,7 +64,7 @@
                                                 </tr>
                                             </template>
                                             <!-- Show placeholder if no availability slots exist -->
-                                            <template v-else>
+                                            <template>
                                                 <tr>
                                                     <td 
                                                         class="p-5 text-center text-sm leading-6 font-medium text-gray-500" 
@@ -75,12 +83,12 @@
                         </div>
                         <!-- End main content section -->
 
-                        <!-- User Creation Form -->
+                        <!--  Creation Form -->
                         <div class="w-full md:w-1/3 p-2 flex justify-start">
-                            <form @submit.prevent="saveAvailability" class="w-full bg-white p-5 rounded-lg shadow-md">
+                            <form @submit.prevent="makeAppointment" class="w-full bg-white p-5 rounded-lg shadow-md">
                                 <!-- Title -->
                                 <div class="text-left mb-4">
-                                    <h2 class="text-2xl font-bold text-gray-800">Set Availability</h2>
+                                    <h2 class="text-2xl font-bold text-gray-800">Make Appointment</h2>
                                 </div>
                                 
                                 <div class="mb-4">
@@ -99,24 +107,27 @@
 
                                 <!-- Date Input -->
                                 <div class="mb-4">
-                                    <label for="date" class="block text-sm font-medium text-gray-700">Date:</label>
-                                    <input type="date" v-model="form.date" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300 focus:border-blue-500" />
-                                </div>
-
-                                <!-- Start Time Input -->
-                                <div class="mb-4">
-                                    <label for="start_time" class="block text-sm font-medium text-gray-700">Start Time:</label>
-                                    <input type="time" v-model="form.start_time" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300 focus:border-blue-500" />
-                                </div>
-
-                                <!-- End Time Input -->
-                                <div class="mb-4">
-                                    <label for="end_time" class="block text-sm font-medium text-gray-700">End Time:</label>
-                                    <input type="time" v-model="form.end_time" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300 focus:border-blue-500" />
+                                    <label for="appointment_date" class="block text-sm font-medium text-gray-700">Date:</label>
+                                    <select 
+                                        v-model="form.appointment_date" 
+                                        required 
+                                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300 focus:border-blue-500"
+                                    >
+                                        <option value="" disabled selected>Select a date</option>
+                                        <option v-for="available in props.availability" :key="available.date" :value="available.date">
+                                            {{ formatDate(available.date) }}
+                                        </option>
+                                    </select>
                                 </div>
 
                                 <!-- Submit Button -->
-                                <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 rounded transition duration-200 text-center">Save Availability</button>
+                                <button 
+                                    type="submit" 
+                                    :disabled="form.processing" 
+                                    class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 rounded transition duration-200 text-center"
+                                >
+                                    {{ form.processing ? 'Saving...' : 'Save Availability' }}
+                                </button>                            
                             </form>
                         </div>
                         <!-- End User Creation Form -->
@@ -130,12 +141,16 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { ref } from 'vue';
-import { Head } from '@inertiajs/vue3';
+import { Head, router } from '@inertiajs/vue3';
 import Swal from 'sweetalert2';
 import { useForm } from '@inertiajs/vue3';
 
 // Props
 const props = defineProps({
+    userId: {
+        type: Number,
+        required: true,
+    },
     doctors: {
         type: Array,
         required: true,
@@ -148,27 +163,54 @@ const props = defineProps({
 
 // Form state
 const form = useForm({
+    patient_id: props.userId,
     doctor_id: '',
-    date: '',
-    start_time: '',
-    end_time: '',
+    appointment_date: '',
+    status: 'pending',
 });
 
-// Save availability
-const saveAvailability = () => {
-    if (form.start_time >= form.end_time) {
-        Swal.fire('Error', 'End time must be after start time.', 'error');
-        return;
-    }
+const makeAppointment = () => {
+    console.log('Form data:', form);
+    const formData = {
+        patient_id: form.patient_id,
+        doctor_id: form.doctor_id,
+        appointment_date: form.appointment_date,
+        status: 'pending',
+    };
 
-    form.post(route('availability.store'), {
-        onSuccess: () => {
-            Swal.fire('Success', 'Availability saved successfully!', 'success');
-            form.reset();
+    form.post(route('appointments.store'), formData, {
+        onSuccess: (page) => {
+            const successMessage = page?.props?.flash?.success || 'The appointment has been created successfully.';
+            Swal.fire({
+                icon: 'success',
+                title: 'Appointment Created',
+                text: successMessage,
+                confirmButtonText: 'OK',
+            }).then(() => {
+                router.visit(route('appointments.my-appointments'));
+                // Reset form
+                form.reset();
+                // Close modal
+                closeModal();
+            });
         },
         onError: (errors) => {
-            const errorMessage = Object.values(errors.response?.data?.errors || {}).flat().join(', ');
-            Swal.fire('Error', errorMessage || 'Failed to save availability.', 'error');
+            const errorMessage = Object.values(errors).flat().join('\n');
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: errorMessage || 'There was a problem creating the appointment.',
+                confirmButtonText: 'Try Again',
+            });
+        },
+        onFinish: () => {
+            Swal.fire({
+                icon: 'info',
+                title: 'Request Completed',
+                text: 'Your request has been processed.',
+                confirmButtonText: 'OK',
+                timer: 2000,
+            });
         },
     });
 };
@@ -184,22 +226,5 @@ const formatTime = (timeString) => {
     const [hours, minutes] = timeString.split(':');
     const date = new Date(`1970-01-01T${hours}:${minutes}:00`);
     return date.toLocaleTimeString([], { hour: 'numeric', minute: 'numeric', hour12: true });
-};
-
-// Delete availability
-const deleteItem = (id) => {
-    Swal.fire({
-        title: 'Are you sure?',
-        text: 'This action cannot be undone!',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Yes, delete it!',
-    }).then((result) => {
-        if (result.isConfirmed) {
-            form.delete(route('availability.destroy', id), {
-                onSuccess: () => Swal.fire('Deleted!', 'The availability has been deleted.', 'success'),
-            });
-        }
-    });
 };
 </script>

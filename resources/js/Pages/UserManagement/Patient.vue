@@ -60,7 +60,7 @@
                             <form @submit.prevent="submitForm" class="w-full bg-white p-5 rounded-lg">
                                 <!-- Title -->
                                 <div class="text-left">
-                                    <h2 class="text-xl font-bold">Create New Admin</h2>
+                                    <h2 class="text-xl font-bold">Create Patient</h2>
                                 </div>
                                 <div class="mt-4 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-12">
                                     <!-- Name Input -->

@@ -87,13 +87,9 @@
                   <i class="fa-solid fa-house-chimney mr-2"></i>
                   <span class="truncate">Dashboard</span>
                 </a>
-                <a href="#" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
+                <a :href="route('diagnose.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
                   <i class="fa-solid fa-notes-medical mr-2"></i>
                   <span class="truncate">Diagnose</span>
-                </a>
-                <a href="#" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
-                  <i class="fa-solid fa-prescription mr-2"></i>
-                  <span class="truncate">Prescription</span>
                 </a>
                 <a href="#" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
                   <i class="fa-solid fa-prescription mr-2"></i>
@@ -103,16 +99,7 @@
                   <i class="fa-solid fa-folder-open mr-2"></i>
                   <span class="truncate">Reports</span>
                 </a>
-                <div class="border-t border-gray-300 pt-4"></div>
-                <!-- Manage Users Section -->
-                <div class="text-invicta uppercase font-bold text-gray-700 text-xs tracking-wide leading-tight ml-[12px]">Doctors Availability</div>
 
-                <!-- User Management Links -->
-                <a :href="route('availability.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
-                  <i class="fa-solid fa-user-tie mr-2"></i>
-                  <span class="truncate">Availability</span>
-                </a>
-                
                 <div class="border-t border-gray-300 pt-4"></div>
                 <!-- Manage Users Section -->
                 <div class="text-invicta uppercase font-bold text-gray-700 text-xs tracking-wide leading-tight ml-[12px]">Manage Users</div>

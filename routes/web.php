@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DoctorAvailabilityController;
+use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\IndividualRecordController;
 
 
 Route::get('/', [WelcomeController::class, 'index'])->name('mainpage');
@@ -38,6 +40,19 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('availability', [DoctorAvailabilityController::class, 'index'])->name('availability.index');
     Route::post('availability', [DoctorAvailabilityController::class, 'store'])->name('availability.store');
     Route::delete('availability/{id}', [DoctorAvailabilityController::class, 'destroy'])->name('availability.destroy');
+});
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/appointments', [AppointmentController::class, 'index'])->name('appointments.index');
+    Route::get('/appointment/create', [AppointmentController::class, 'create'])->name('appointments.create');
+    Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointments.store');
+});
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/diagnose', [IndividualRecordController::class, 'index'])->name('diagnose.index');
+    Route::get('/diagnose/{user}', [IndividualRecordController::class, 'create'])->name('diagnose.create');
+    Route::post('/diagnose', [IndividualRecordController::class, 'store'])->name('diagnose.store');
+
 });
 
 Route::get('/logout', function() {
