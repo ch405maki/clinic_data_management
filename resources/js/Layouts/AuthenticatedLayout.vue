@@ -108,19 +108,19 @@
                 <div class="text-invicta uppercase font-bold text-gray-700 text-xs tracking-wide leading-tight ml-[12px]">Manage Users</div>
 
                 <!-- User Management Links -->
-                <a href="#" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
+                <a :href="route('admin.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
                   <i class="fa-solid fa-user-tie mr-2"></i>
                   <span class="truncate">Admins</span>
                 </a>
-                <a href="#" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
+                <a :href="route('doctor.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
                   <i class="fa-solid fa-user-doctor mr-2"></i>
                   <span class="truncate">Doctors</span>
                 </a>
-                <a href="#" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
+                <a :href="route('nurse.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
                   <i class="fa-solid fa-user-nurse mr-2"></i>
                   <span class="truncate">Nurses</span>
                 </a>
-                <a href="#" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
+                <a :href="route('patient.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
                   <i class="fa-solid fa-users mr-2"></i>
                   <span class="truncate">Patients</span>
                 </a>
