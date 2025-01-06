@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\DoctorAvailabilityController;
 
 
 Route::get('/', [WelcomeController::class, 'index'])->name('mainpage');
@@ -31,6 +32,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::post('/users', [UserController::class, 'store'])->name('users.store');
     Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+});
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('availability', [DoctorAvailabilityController::class, 'index'])->name('availability.index');
+    Route::post('availability', [DoctorAvailabilityController::class, 'store'])->name('availability.store');
+    Route::delete('availability/{id}', [DoctorAvailabilityController::class, 'destroy'])->name('availability.destroy');
 });
 
 Route::get('/logout', function() {
