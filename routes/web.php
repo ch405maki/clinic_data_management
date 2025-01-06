@@ -11,6 +11,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\DoctorAvailabilityController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\IndividualRecordController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\MedCertController;
 
 
 Route::get('/', [WelcomeController::class, 'index'])->name('mainpage');
@@ -53,6 +55,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/diagnose/{user}', [IndividualRecordController::class, 'create'])->name('diagnose.create');
     Route::post('/diagnose', [IndividualRecordController::class, 'store'])->name('diagnose.store');
 
+});
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/report', [ReportController::class, 'index'])->name('report.index');
+    Route::get('/patients/{patientId}/history', [ReportController::class, 'history'])->name('patient.history');
+});
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/certificate', [MedCertController::class, 'index'])->name('certificate.index');
+    Route::get('/certificate/{patientId}/history', [MedCertController::class, 'history'])->name('certificate.history');
+    Route::get('/certificate/{fileId}/generate', [MedCertController::class, 'generate'])->name('certificate.generate');
 });
 
 Route::get('/logout', function() {

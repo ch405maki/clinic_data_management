@@ -6,7 +6,7 @@
           <div class="flex justify-between items-center">
             <!-- Heading Section -->
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-              Reports
+                Medical Certificate
             </h2>
             <div class="flex items-center">
             <div class="relative text-gray-500 focus-within:text-gray-900">
@@ -38,7 +38,6 @@
                 <table class="table-auto w-full">
                   <thead>
                     <tr class="bg-gray-100 rounded-lg">
-                      <th class="px-4 py-2 text-left">Date</th>
                       <th class="px-4 py-2 text-left">Full Name</th>
                       <th class="px-4 py-2 text-left">Contact No.</th>
                       <th class="px-4 py-2 text-left">Email</th>
@@ -52,13 +51,6 @@
                       :key="index"
                       class="border-b border-gray-200 hover:bg-gray-100 text-sm"
                     >
-                      <td class="px-4 py-2">
-                        {{ new Date(record?.date).toLocaleDateString('en-US', {
-                          year: 'numeric',
-                          month: 'long',
-                          day: 'numeric',
-                        }) || 'N/A' }}
-                      </td>
                       <td class="px-4 py-2">
                         {{ record.patient?.lname }}, {{ record.patient?.name }}
                       </td>
@@ -133,7 +125,7 @@
       cancelButtonText: "No, cancel!",
     }).then((result) => {
       if (result.isConfirmed) {
-        Inertia.visit(`/patients/${id}/history`);
+        Inertia.visit(`/certificate/${id}/history`);
       }
     });
   };

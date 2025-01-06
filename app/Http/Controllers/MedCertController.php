@@ -6,34 +6,19 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\IndividualRecord;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
-
-class ReportController extends Controller
+class MedCertController extends Controller
 {
-    const ROLES = [
-        'Admin' => 1,
-        'Doctor' => 2,
-        'Nurse' => 3,
-        'Patient' => 4,
-    ];
-
     public function index()
     {
         // Get the currently authenticated user
         $user = Auth::user();
 
-        // Fetch IndividualRecords based on user role
-        if ($user->role === 'Patient') {
-            $records = IndividualRecord::with('patient')
-                ->where('patient_id', $user->id)
-                ->get();
-        } else {
-            $records = IndividualRecord::with('patient')
-                ->get()
-                ->unique('patient_id');
-        }
-
+        $records = IndividualRecord::with('patient')
+            ->get()
+            ->unique('patient_id');
+        
         // Return the view with the fetched data
-        return Inertia::render('Report/Index', [
+        return Inertia::render('Certificate/Index', [
             'records' => $records,
             'userRole' => $user->role,
         ]);
@@ -53,10 +38,19 @@ class ReportController extends Controller
         $user = $records->first()->patient;
 
         // Return the view with the fetched data
-        return Inertia::render('Report/History', [
+        return Inertia::render('Certificate/History', [
             'records' => $records,
             'user' => $user,
             'userRole' => auth()->user()->role,
         ]);
     }
+
+    public function generate($fileId)
+{
+    $individualRecord = IndividualRecord::with('patient')->find($fileId);
+
+    return Inertia::render('Certificate/Generate', [
+        'record' => $individualRecord,
+    ]);
+}
 }

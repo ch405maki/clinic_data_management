@@ -1,11 +1,10 @@
 <?php
 
-// app/Models/IndividualRecord.php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Auth;
 
 class IndividualRecord extends Model
 {
@@ -20,8 +19,19 @@ class IndividualRecord extends Model
         'management',
     ];
 
+    protected $dates = ['created_at', 'updated_at'];
+
     public function patient()
     {
         return $this->belongsTo(User::class, 'patient_id');
+    }
+
+    public function scopeFilterByRole($query)
+    {
+        if (Auth::user()->role !== 'Patient') {
+            return $query;
+        }
+
+        return $query->where('patient_id', Auth::id());
     }
 }

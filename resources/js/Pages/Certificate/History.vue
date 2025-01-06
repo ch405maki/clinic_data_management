@@ -6,7 +6,7 @@
           <div class="flex justify-between items-center">
             <!-- Heading Section -->
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-              Reports
+                Medical Certificate
             </h2>
             <div class="flex items-center">
             <div class="relative text-gray-500 focus-within:text-gray-900">
@@ -38,12 +38,11 @@
                 <table class="table-auto w-full">
                   <thead>
                     <tr class="bg-gray-100 rounded-lg">
-                      <th class="px-4 py-2 text-left">Date</th>
-                      <th class="px-4 py-2 text-left">Full Name</th>
-                      <th class="px-4 py-2 text-left">Contact No.</th>
-                      <th class="px-4 py-2 text-left">Email</th>
-                      <th class="px-4 py-2 text-left">Address</th>
-                      <th class="px-4 py-2">Actions</th>
+                        <th class="px-4 py-2 text-left">Date</th>
+                        <th class="px-4 py-2 text-left">Full Name</th>
+                        <th class="px-4 py-2 text-left">Chief Complaints</th>
+                        <th class="px-4 py-2 text-left">Diagnosis</th>
+                        <th class="px-4 py-2">Actions</th>
                     </tr>
                   </thead>
                   <tbody class="text-gray-700">
@@ -52,25 +51,24 @@
                       :key="index"
                       class="border-b border-gray-200 hover:bg-gray-100 text-sm"
                     >
-                      <td class="px-4 py-2">
+                    <td class="px-4 py-2">
                         {{ new Date(record?.date).toLocaleDateString('en-US', {
                           year: 'numeric',
                           month: 'long',
                           day: 'numeric',
                         }) || 'N/A' }}
-                      </td>
+                    </td>
                       <td class="px-4 py-2">
                         {{ record.patient?.lname }}, {{ record.patient?.name }}
                       </td>
-                      <td class="px-4 py-2">{{ record.patient?.contact_no }}</td>
-                      <td class="px-4 py-2">{{ record.patient?.email }}</td>
-                      <td class="px-4 py-2">{{ record.patient?.address }}</td>
-                      <td class="px-2 py-1">
+                      <td class="px-4 py-2">{{ record?.chief_complaints }}</td>
+                      <td class="px-4 py-2">{{ record?.diagnosis }}</td>
+                      <td class="px-2 py-1 text-center">
                         <button
-                          @click="showHistory(record.patient.id)"
+                          @click="generate(record.id)"
                           class="text-blue-500 hover:text-white hover:bg-blue-500 border border-blue-500 rounded px-2 py-1 text-xs"
                         >
-                          <i class="fa-solid fa-folder-open mr-1"></i> History
+                        <i class="fa-solid fa-file mr-1"></i> Generate Medical Certificate
                         </button>
                       </td>
                     </tr>
@@ -123,17 +121,17 @@
 });
   
   // Show patient history
-  const showHistory = (id) => {
+  const generate = (fileId) => {
     Swal.fire({
-      title: "View Patient History?",
-      text: "You will be redirected to the patient history page.",
+      title: "Generate Medical Certificate?",
+      text: "You will be redirected to the Medical Certificate Printing page.",
       icon: "question",
       showCancelButton: true,
-      confirmButtonText: "Yes, view history!",
+      confirmButtonText: "Generate!",
       cancelButtonText: "No, cancel!",
     }).then((result) => {
       if (result.isConfirmed) {
-        Inertia.visit(`/patients/${id}/history`);
+        Inertia.visit(`/certificate/${fileId}/generate`);
       }
     });
   };

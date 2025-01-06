@@ -91,11 +91,11 @@
                   <i class="fa-solid fa-notes-medical mr-2"></i>
                   <span class="truncate">Diagnose</span>
                 </a>
-                <a href="#" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
+                <a :href="route ('certificate.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
                   <i class="fa-solid fa-prescription mr-2"></i>
                   <span class="truncate">Medical Cerificate</span>
                 </a>
-                <a href="#" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
+                <a :href="route ('report.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
                   <i class="fa-solid fa-folder-open mr-2"></i>
                   <span class="truncate">Reports</span>
                 </a>
@@ -136,7 +136,7 @@
           </div>
           <main class="lg:col-span-9 xl:col-span-10">
             <header v-if="$slots.header" class="">
-            <div class="max-w-7xl mx-auto py-6 px-4 mx-10 sm:px-6 lg:px-8 rounded-lg bg-white shadow">
+            <div class="max-w-7xl mx-auto py-4 px-4 mx-10 sm:px-6 lg:px-8 rounded-lg bg-white shadow">
             <slot name="header" />
             </div>
             </header>
