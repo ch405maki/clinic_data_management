@@ -101,7 +101,7 @@ class UserController extends Controller
             'emergency_contact_no' => $request->emergency_contact_no,
         ]);
 
-        return redirect()->route('admin.index')->with('success', 'User created successfully.');
+        return redirect()->back()->with('success', 'User created successfully.');
     }
 
     public function updateRole(Request $request, User $user)

@@ -144,17 +144,17 @@
 
                                     <!-- Gender Input -->
                                     <div class="sm:col-span-12">
-                                        <InputLabel for="gender" value="Gender" />
-                                        <Select
+                                        <label for="gender" class="block text-sm font-medium text-gray-700">Gender</label>
+                                        <select
                                             id="gender"
                                             v-model="form.gender"
                                             required
-                                            class="mt-1 block w-full border border-gray-300 rounded-lg "
+                                            class="mt-1 block w-full border border-gray-300 rounded-lg"
                                         >
                                             <option value="">Select Gender</option>
                                             <option value="Male">Male</option>
                                             <option value="Female">Female</option>
-                                        </Select>
+                                        </select>
                                     </div>
 
                                     <!-- Address Input -->

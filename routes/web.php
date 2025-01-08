@@ -13,14 +13,15 @@ use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\IndividualRecordController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\MedCertController;
+use App\Http\Controllers\DashboardController;
 
 
 Route::get('/', [WelcomeController::class, 'index'])->name('mainpage');
 Route::get('about', [WelcomeController::class, 'about'])->name('about');
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

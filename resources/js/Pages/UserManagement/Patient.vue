@@ -1,9 +1,9 @@
 <template>
-    <Head title="Admin Management" />
+    <Head title="Patient Management" />
 
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Admin Management</h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Patient Management</h2>
         </template>
         <div class="flex flex-col min-h-screen bg-gray-100 dark:bg-gray-900">
             <main class="flex-grow">
@@ -170,17 +170,17 @@
 
                                     <!-- Gender Input -->
                                     <div class="sm:col-span-12">
-                                        <InputLabel for="gender" value="Gender" />
-                                        <Select
+                                        <label for="gender" class="block text-sm font-medium text-gray-700">Gender</label>
+                                        <select
                                             id="gender"
                                             v-model="form.gender"
                                             required
-                                            class="mt-1 block w-full border border-gray-300 rounded-lg "
+                                            class="mt-1 block w-full border border-gray-300 rounded-lg"
                                         >
                                             <option value="">Select Gender</option>
                                             <option value="Male">Male</option>
                                             <option value="Female">Female</option>
-                                        </Select>
+                                        </select>
                                     </div>
 
                                     <!-- Position Input -->
@@ -329,7 +329,7 @@ const form = useForm({
     lname: '',
     email: '',
     password: '',
-    role: 'Admin', 
+    role: 'Patient', 
     course_year: '',
     date_of_birth: '',
     age: '',

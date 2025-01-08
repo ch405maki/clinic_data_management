@@ -83,47 +83,57 @@
             <nav aria-label="Sidebar" class="sticky top-4 divide-y divide-gray-300">
               <div class="space-y-2 pb-8">
                 <!-- Dashboard -->
-                <a :href="route ('dashboard')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
-                  <i class="fa-solid fa-house-chimney mr-2"></i>
-                  <span class="truncate">Dashboard</span>
-                </a>
-                <a :href="route('diagnose.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
-                  <i class="fa-solid fa-notes-medical mr-2"></i>
-                  <span class="truncate">Diagnose</span>
-                </a>
-                <a :href="route ('certificate.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
-                  <i class="fa-solid fa-prescription mr-2"></i>
-                  <span class="truncate">Medical Cerificate</span>
-                </a>
-                <a :href="route ('report.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
-                  <i class="fa-solid fa-folder-open mr-2"></i>
-                  <span class="truncate">Reports</span>
-                </a>
-
-                <div class="border-t border-gray-300 pt-4"></div>
-                <!-- Manage Users Section -->
-                <div class="text-invicta uppercase font-bold text-gray-700 text-xs tracking-wide leading-tight ml-[12px]">Manage Users</div>
+                <div v-if="user.role === 'Patient'">
+                  <a :href="route ('dashboard')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
+                    <i class="fa-solid fa-house-chimney mr-2"></i>
+                    <span class="truncate">My Record</span>
+                  </a>
+                </div>
+                <div v-if="user.role != 'Patient'">
+                  <a :href="route ('dashboard')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
+                    <i class="fa-solid fa-house-chimney mr-2"></i>
+                    <span class="truncate">Dashboard</span>
+                  </a>
+                  <a :href="route('diagnose.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
+                    <i class="fa-solid fa-notes-medical mr-2"></i>
+                    <span class="truncate">Diagnose</span>
+                  </a>
+                  <a :href="route ('certificate.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
+                    <i class="fa-solid fa-prescription mr-2"></i>
+                    <span class="truncate">Medical Cerificate</span>
+                  </a>
+                  <a :href="route ('report.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
+                    <i class="fa-solid fa-folder-open mr-2"></i>
+                    <span class="truncate">Reports</span>
+                  </a>
+                </div>
 
                 <!-- User Management Links -->
-                <a :href="route('admin.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
-                  <i class="fa-solid fa-user-tie mr-2"></i>
-                  <span class="truncate">Admins</span>
-                </a>
-                <a :href="route('doctor.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
-                  <i class="fa-solid fa-user-doctor mr-2"></i>
-                  <span class="truncate">Doctors</span>
-                </a>
-                <a :href="route('nurse.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
-                  <i class="fa-solid fa-user-nurse mr-2"></i>
-                  <span class="truncate">Nurses</span>
-                </a>
-                <a :href="route('patient.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
-                  <i class="fa-solid fa-users mr-2"></i>
-                  <span class="truncate">Patients</span>
-                </a>
+                <div v-if="user.role === 'Admin'">
+                  <div class="border-t border-gray-300 pt-4"></div>
+                  <!-- Manage Users Section -->
+                  <div class="text-invicta uppercase font-bold text-gray-700 text-xs tracking-wide leading-tight ml-[12px]">Manage Users</div>
+
+                  <a :href="route('admin.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
+                    <i class="fa-solid fa-user-tie mr-2"></i>
+                    <span class="truncate">Admins</span>
+                  </a>
+                  <a :href="route('doctor.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
+                    <i class="fa-solid fa-user-doctor mr-2"></i>
+                    <span class="truncate">Doctors</span>
+                  </a>
+                  <a :href="route('nurse.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
+                    <i class="fa-solid fa-user-nurse mr-2"></i>
+                    <span class="truncate">Nurses</span>
+                  </a>
+                  <a :href="route('patient.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
+                    <i class="fa-solid fa-users mr-2"></i>
+                    <span class="truncate">Patients</span>
+                  </a>
+                </div>
 
                 <!-- Profile and Logout Section -->
-                <div class="pt-10">
+                <div class="">
                   <div class="border-t border-gray-300 pt-4"></div>
                   <div class="text-invicta uppercase font-bold text-gray-700 text-xs tracking-wide leading-tight ml-[12px]">Account</div>
                   <div class="mt-3" aria-labelledby="account-headline">
