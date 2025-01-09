@@ -131,6 +131,15 @@
                     <span class="truncate">Patients</span>
                   </a>
                 </div>
+                <div v-if="user.role === 'Doctor' || user.role === 'Nurse'">
+                  <div class="border-t border-gray-300 pt-4"></div>
+                  <!-- Manage Users Section -->
+                  <div class="text-invicta uppercase font-bold text-gray-700 text-xs tracking-wide leading-tight ml-[12px]">Manage Users</div>
+                  <a :href="route('patient.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
+                    <i class="fa-solid fa-users mr-2"></i>
+                    <span class="truncate">Patients</span>
+                  </a>
+                </div>
 
                 <!-- Profile and Logout Section -->
                 <div class="">
