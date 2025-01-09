@@ -35,6 +35,7 @@ class User extends Authenticatable
         'emergency_address',
         'emergency_contact_no',
         'role',
+        'profile_picture',
     ];
 
     /**

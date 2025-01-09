@@ -229,35 +229,123 @@
                 />
             </div>
 
-            <!-- Password Input -->
-            <div class="sm:col-span-12 mt-4">
-                <InputLabel for="password" value="Password" />
-                <TextInput
-                    id="password"
-                    v-model="form.password"
-                    required
-                    type="password"
-                    class="mt-1 block w-full border border-gray-300 rounded-lg "
-                    placeholder="Password Here..."
-                />
-                <InputError class="mt-2" :message="form.errors.password" />
-            </div>
-
+            <!-- Profile Picture -->
             <div class="mt-4">
-                <InputLabel for="password_confirmation" value="Confirm Password" />
-
-                <TextInput
-                    id="password_confirmation"
-                    type="password"
-                    class="mt-1 block w-full"
-                    v-model="form.password_confirmation"
-                    required
-                    autocomplete="new-password"
-                    placeholder="Confirm Password Here..."
+                <InputLabel for="profile_picture" value="Profile Picture" />
+                <input 
+                    id="profile_picture" 
+                    type="file" 
+                    class="mt-1 block w-full" 
+                    @change="handleFileChange"
                 />
-
-                <InputError class="mt-2" :message="form.errors.password_confirmation" />
+                <InputError class="mt-2" :message="form.errors.profile_picture" />
+                <img v-if="previewImage" :src="previewImage" class="w-20 h-20 object-cover">
             </div>
+
+            <!-- Password -->
+            <div class="mt-4">
+                    <label for="password" class="text-gray-600 mb-2 block">Password</label>
+                    <p class="text-sm text-red-600 mb-2">
+                        Password must be at least 8 characters long and include a mix of uppercase, lowercase, numbers, and special characters.
+                    </p>
+                    <div class="relative">
+                        <input
+                            :type="showPassword ? 'text' : 'password'"
+                            name="password"
+                            id="password"
+                            class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-teal-500 placeholder-gray-400"
+                            placeholder="***********"
+                            v-model="form.password"
+                            @input="validatePassword"
+                            required
+                        />
+                        <div
+                            class="cursor-pointer absolute inset-y-0 right-0 flex items-center px-8 text-gray-600 border-l border-gray-300"
+                            @click="togglePasswordVisibility"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="1.5"
+                                stroke="currentColor"
+                                class="w-5 h-5"
+                                v-if="showPassword"
+                            >
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="1.5"
+                                stroke="currentColor"
+                                class="w-5 h-5"
+                                v-else
+                            >
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <ul class="text-sm text-red-600 mt-2">
+                        <li v-if="!passwordValid.length">- Minimum 8 characters.</li>
+                        <li v-if="!passwordValid.uppercase">- At least one uppercase letter.</li>
+                        <li v-if="!passwordValid.lowercase">- At least one lowercase letter.</li>
+                        <li v-if="!passwordValid.number">- At least one number.</li>
+                        <li v-if="!passwordValid.special">- At least one special character.</li>
+                    </ul>
+                    <InputError class="mt-2" :message="form.errors.password" />
+                </div>
+
+                <!-- Confirm Password -->
+                <div class="mt-4">
+                    <label for="password_confirmation" class="text-gray-600 mb-2 block">Confirm Password</label>
+                    <div class="relative">
+                        <input
+                            :type="showConfirmPassword ? 'text' : 'password'"
+                            name="password_confirmation"
+                            id="password_confirmation"
+                            class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-teal-500 placeholder-gray-400"
+                            placeholder="***********"
+                            v-model="form.password_confirmation"
+                            @input="validatePasswordMatch"
+                            required
+                        />
+                        <div
+                            class="cursor-pointer absolute inset-y-0 right-0 flex items-center px-8 text-gray-600 border-l border-gray-300"
+                            @click="toggleConfirmPasswordVisibility"
+                        >
+                        <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="1.5"
+                                stroke="currentColor"
+                                class="w-5 h-5"
+                                v-if="showPassword"
+                            >
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="1.5"
+                                stroke="currentColor"
+                                class="w-5 h-5"
+                                v-else
+                            >
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <p v-if="!passwordMatch" class="text-sm text-red-600 mt-2">Passwords do not match.</p>
+                    <InputError class="mt-2" :message="form.errors.password_confirmation" />
+                </div>
 
             <div class="flex items-center justify-end mt-4">
                 <Link
@@ -276,6 +364,7 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
@@ -283,6 +372,39 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
+
+const showPassword = ref(false);
+    const showConfirmPassword = ref(false);
+
+    function togglePasswordVisibility() {
+        showPassword.value = !showPassword.value;
+    }
+
+    function toggleConfirmPasswordVisibility() {
+        showConfirmPassword.value = !showConfirmPassword.value;
+    }
+
+    const passwordValid = ref({
+    length: false,
+    uppercase: false,
+    lowercase: false,
+    number: false,
+    special: false,
+    });
+    const passwordMatch = ref(true);
+
+    function validatePassword() {
+        const password = form.password;
+        passwordValid.value.length = password.length >= 8;
+        passwordValid.value.uppercase = /[A-Z]/.test(password);
+        passwordValid.value.lowercase = /[a-z]/.test(password);
+        passwordValid.value.number = /[0-9]/.test(password);
+        passwordValid.value.special = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+    }
+
+    function validatePasswordMatch() {
+        passwordMatch.value = form.password === form.password_confirmation;
+    }
 
 const form = useForm({
     name: '',
@@ -304,11 +426,19 @@ const form = useForm({
     emergency_relationship: '',
     emergency_address: '',
     emergency_contact_no: '',
+    profile_picture: null, 
 });
 
 const submit = () => {
     form.post(route('register'), {
         onFinish: () => form.reset('password', 'password_confirmation'),
     });
+};
+
+const previewImage = ref(null);
+
+const handleFileChange = (e) => {
+  form.profile_picture = e.target.files[0];
+  previewImage.value = URL.createObjectURL(e.target.files[0]);
 };
 </script>

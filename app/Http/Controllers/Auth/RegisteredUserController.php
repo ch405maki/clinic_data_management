@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -50,6 +51,7 @@ class RegisteredUserController extends Controller
             'emergency_relationship' => 'nullable|string',
             'emergency_address' => 'nullable|string',
             'emergency_contact_no' => 'nullable|string',
+            'profile_picture' => 'nullable|mimes:jpg,jpeg,png|max:2048',
         ]);
 
         $user = User::create([
@@ -72,6 +74,13 @@ class RegisteredUserController extends Controller
             'emergency_address' => $request->emergency_address,
             'emergency_contact_no' => $request->emergency_contact_no,
         ]);
+
+        if ($request->hasFile('profile_picture')) {
+            $profilePicture = $request->file('profile_picture');
+            $filename = time().'.'.$profilePicture->getClientOriginalExtension();
+            Storage::putFileAs('public/profile_pictures', $profilePicture, $filename);
+            $user->update(['profile_picture' => $filename]);
+        }
 
         event(new Registered($user));
 
