@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -29,16 +30,42 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $user = $request->user();
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        // Update user attributes with validated data
+        $user->fill($request->validated());
+
+        // If email is updated, mark it as unverified
+        if ($user->isDirty('email')) {
+            $user->email_verified_at = null;
         }
 
-        $request->user()->save();
+        // Handle profile picture upload
+        if ($request->hasFile('profile_picture')) {
+            $profilePicture = $request->file('profile_picture');
 
-        return Redirect::route('profile.edit');
+            // Delete the old profile picture if it exists
+            if ($user->profile_picture && Storage::exists('public/profile_pictures/' . $user->profile_picture)) {
+                Storage::delete('public/profile_pictures/' . $user->profile_picture);
+            }
+
+            // Generate a unique filename
+            $filename = time() . '.' . $profilePicture->getClientOriginalExtension();
+
+            // Store the new profile picture
+            Storage::putFileAs('public/profile_pictures', $profilePicture, $filename);
+
+            // Save the relative path for frontend access using storage link
+            $user->update(['profile_picture' => 'storage/profile_pictures/' . $filename]);
+        }
+
+        // Save user data
+        $user->save();
+
+        return Redirect::route('profile.edit')->with('status', 'Profile updated successfully.');
     }
+
+    
 
     /**
      * Delete the user's account.

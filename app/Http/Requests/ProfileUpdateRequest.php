@@ -16,8 +16,24 @@ class ProfileUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
+            'name' => 'nullable|string|max:255',
+            'mname' => 'nullable|string|max:255',
+            'lname' => 'nullable|string|max:255',
+            'email' => 'nullable|email|max:255|unique:users,email,' . $this->user()->id,
+            'course_year' => 'nullable|string|max:255',
+            'date_of_birth' => 'nullable|date',
+            'age' => 'nullable|integer',
+            'gender' => 'nullable|string|in:Male,Female',
+            'position' => 'nullable|string|max:255',
+            'civil_status' => 'nullable|string|in:Single,Married,Widowed,Separated',
+            'address' => 'nullable|string|max:255',
+            'contact_no' => 'nullable|string|max:15',
+            'emergency_name' => 'nullable|string|max:255',
+            'emergency_relationship' => 'nullable|string|max:255',
+            'emergency_address' => 'nullable|string|max:255',
+            'emergency_contact_no' => 'nullable|string|max:15',
+            'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
     }
+
 }
