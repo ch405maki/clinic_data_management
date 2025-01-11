@@ -4,9 +4,9 @@
     <nav class="bg-white border-gray-200 border-b-2 shadow-lg">
       <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-2">
         <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
-          <img src="/images/logo.png" class="h-12" alt="KSU Dental Clinic Logo" />
+          <img src="/images/logo.png" class="h-12" alt="Clinic Data Management System " />
           <div class="flex flex-col">
-            <span class="self-start sm:text-xl font-semibold">KSU Dental Clinic</span>
+            <span class="self-start sm:text-xl font-semibold">Clinic Data Management System </span>
             <span class="self-start text-sm text-gray-500">Purok 6, Bulanao Tabuk City, Kalinga</span>
           </div>
         </a>
