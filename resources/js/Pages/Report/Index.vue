@@ -133,7 +133,7 @@
       cancelButtonText: "No, cancel!",
     }).then((result) => {
       if (result.isConfirmed) {
-        Inertia.visit(`/patients/${id}/history`);
+        window.location.href = `/patients/${id}/history`;
       }
     });
   };

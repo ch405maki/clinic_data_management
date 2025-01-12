@@ -125,7 +125,7 @@
       cancelButtonText: "No, cancel!",
     }).then((result) => {
       if (result.isConfirmed) {
-        Inertia.visit(`/certificate/${id}/history`);
+        window.location.href = `/certificate/${id}/history`;
       }
     });
   };

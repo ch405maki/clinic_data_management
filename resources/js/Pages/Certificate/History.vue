@@ -131,7 +131,7 @@
       cancelButtonText: "No, cancel!",
     }).then((result) => {
       if (result.isConfirmed) {
-        Inertia.visit(`/certificate/${fileId}/generate`);
+        window.location.href = `/certificate/${fileId}/generate`;
       }
     });
   };

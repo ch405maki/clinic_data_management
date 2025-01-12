@@ -171,8 +171,9 @@ const showUser = (id) => {
     cancelButtonText: "No, cancel!",
   }).then((result) => {
     if (result.isConfirmed) {
-      Inertia.visit(`/diagnose/${id}`);
+      window.location.href = `/diagnose/${id}`;
     }
   });
 };
+
 </script>
