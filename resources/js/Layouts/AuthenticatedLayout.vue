@@ -134,7 +134,7 @@
                     <span class="truncate">Patients</span>
                   </a>
                 </div>
-                <div v-if="user.role === 'Doctor' || user.role === 'Nurse'">
+                <div v-if="user.role === 'Nurse'">
                   <div class="border-t border-gray-300 pt-4"></div>
                   <!-- Manage Users Section -->
                   <div class="text-invicta uppercase font-bold text-gray-700 text-xs tracking-wide leading-tight ml-[12px]">Manage Users</div>

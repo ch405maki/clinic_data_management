@@ -52,7 +52,7 @@
   
                 <form @submit.prevent="saveDiagnostic" class="space-y-4">
                 <div>
-                    <label for="chief_complaints" class="block text-sm font-medium text-gray-700 mb-2"><span class="text-red-500">*</span> Chief Complaints</label>
+                    <label for="chief_complaints" class="block text-sm font-medium text-gray-700 mb-2"><span class="text-red-500">*</span> Chieft Complaints</label>
                     <textarea
                         v-model="form.chief_complaints"
                         rows="4"

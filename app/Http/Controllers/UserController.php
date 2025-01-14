@@ -121,6 +121,6 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
-        return redirect()->route('users');
+        return redirect()->back()->with('success', 'User created successfully.');
     }
 }
