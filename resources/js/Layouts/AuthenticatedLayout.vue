@@ -97,6 +97,10 @@
                     <i class="fa-solid fa-house-chimney mr-2"></i>
                     <span class="truncate">Dashboard</span>
                   </a>
+                  <a :href="route('vital.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
+                    <i class="fa-solid fa-notes-medical mr-2"></i>
+                    <span class="truncate">Vital Sign</span>
+                  </a>
                   <a :href="route('diagnose.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
                     <i class="fa-solid fa-notes-medical mr-2"></i>
                     <span class="truncate">Diagnose</span>
@@ -112,19 +116,14 @@
                 </div>
 
                 <!-- User Management Links -->
-                <div v-if="user.role === 'Admin'">
+                <div v-if="user.role === 'Doctor'">
                   <div class="border-t border-gray-300 pt-4"></div>
                   <!-- Manage Users Section -->
                   <div class="text-invicta uppercase font-bold text-gray-700 text-xs tracking-wide leading-tight ml-[12px]">Manage Users</div>
-
-                  <a :href="route('admin.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
-                    <i class="fa-solid fa-user-tie mr-2"></i>
-                    <span class="truncate">Admins</span>
-                  </a>
-                  <a :href="route('doctor.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
+                  <!-- <a :href="route('doctor.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
                     <i class="fa-solid fa-user-doctor mr-2"></i>
                     <span class="truncate">Doctors</span>
-                  </a>
+                  </a> -->
                   <a :href="route('nurse.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
                     <i class="fa-solid fa-user-nurse mr-2"></i>
                     <span class="truncate">Nurses</span>

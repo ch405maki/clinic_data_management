@@ -56,6 +56,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/diagnose/{user}', [IndividualRecordController::class, 'create'])->name('diagnose.create');
     Route::post('/diagnose', [IndividualRecordController::class, 'store'])->name('diagnose.store');
 
+    Route::get('/update-diagnostic/{id}', [IndividualRecordController::class, 'edit'])->name('diagnostics.edit');
+    Route::put('/update-diagnostic/{id}', [IndividualRecordController::class, 'update'])->name('diagnostics.update');
+
+    Route::get('/vital', [IndividualRecordController::class, 'vitalIndex'])->name('vital.index');
+    Route::get('/vitals/{user}', [IndividualRecordController::class, 'vitalsCreate'])->name('vitals.create');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {

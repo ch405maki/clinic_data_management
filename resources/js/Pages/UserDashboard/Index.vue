@@ -2,134 +2,34 @@
     <div>
     <Head title="Reports" />
     <UserLayout>
-        <template #header>
-            <div class="flex justify-between items-center">
-                <h2 class="font-semibold text-xl text-gray-800 leading-tight">Record of: {{ user?.lname }}, {{ user?.name }}</h2>
-                <div class="flex items-center gap-4">
-                    <!-- Export PDF Button -->
-                    <button
-                        @click="generatePDF"
-                        class="px-4 py-2 bg-indigo-600 text-white rounded-md shadow hover:bg-indigo-700 focus:outline-none"
-                    >
-                        Export to PDF
-                    </button>
-                </div>
-            </div>
-        </template>
-        
-        <div class="py-6">
-            <div class="mx-auto space-y-6 " id="report-content">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-3 rounded-lg">
-                <div class="overflow-x-auto">
-                    <div class="grid grid-cols-12 border-gray-300 bg-white shadow-sm">
-                        <!-- Logo -->
-                        <div class="col-span-2 flex items-center justify-center border-[1px] border-gray-300  bg-white p-4">
-                            <img src="/images/logo.png" class="h-24 w-auto" alt="KSU Logo">
-                        </div>
+        <div class="grid grid-cols-12 gap-6">
+        <!-- First column: span 3 -->
+        <div class="col-span-3 mt-6 bg-white p-4 rounded-lg shadow-md">
+        <img 
+            class="h-20 w-20 rounded-full mx-auto block" 
+            :src="user.profile_picture ? `/storage/profile_pictures/${$page.props.auth.user.profile_picture}` : '/images/avatar.png'" 
+            alt="Profile Picture"
+        >
+        <h3 class="text-lg font-semibold mb-4 text-center">{{ user?.name }} {{ user?.lname }}</h3>
+        <p class="text-sm mb-[4px] text-gray-600">Date of Birth: {{ new Date(user?.date_of_birth).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) || 'N/A' }}</p>
+        <p class="text-sm mb-[4px] text-gray-600">Age: {{ user?.age }}</p>
+        <p class="text-sm mb-[4px] text-gray-600">Gender: {{ user?.gender }}</p>
+        <p class="text-sm mb-[4px] text-gray-600">Civil Status: {{ user?.civil_status }}</p>
+        <p class="text-sm mb-[4px] text-gray-600">Address: {{ user?.address || 'n/a' }}</p>
+        <p class="text-sm mb-[4px] text-gray-600">Contact no: {{ user?.contact_no || 'n/a' }}</p>
+        <p class="text-sm mb-[4px] text-gray-600">Course, and Year: {{ user?.course_year || 'n/a' }}</p>
+        <p class="text-sm mb-[4px] text-gray-600">Position: {{ user?.position || 'n/a' }}</p>
+        </div>
 
-                        <!-- University Information -->
-                        <div class="col-span-6 text-center font-bold border-[1px] border-gray-300  bg-white p-4">
-                            <h2 class="text-lg">Kalinga State University</h2>
-                            <p class="text-sm">Bulanao, Tabuk City</p>
-                            <p class="text-sm">Health Services Unit Medical Section</p>
-                            <p class="text-lg uppercase">Individual Treatment Record</p>
-                            <p class="text-sm"></p>
-                        </div>
 
-                        <!-- Sub-column 1 -->
-                        <div class="col-span-2 border-[1px] border-gray-300  bg-white">
-                            <div class="grid divide-y-2 divide-gray-300">
-                            <div class="p-[3px]">Doc. Ref. No.</div>
-                            <div class="p-[3px]">Effectivity Date:</div>
-                            <div class="p-[3px]">Revision No.</div>
-                            <div class="p-[3px]">Page No.</div>
-                            </div>
-                        </div>
 
-                        <!-- Sub-column 2 -->
-                        <div class="col-span-2 border-[1px] border-gray-300  bg-white">
-                            <div class="grid divide-y-2 divide-gray-300">
-                            <div class="p-[3px]">KSU-OHS MFO4</div>
-                            <div class="p-[3px]">DECEMBER 2018</div>
-                            <div class="text-white p-[3px]">none</div>
-                            <div class="p-[3px]">Page 1 of 1</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-3 text-sm border-gray-300  text-gray-700">
-                    <div class="border-[1px] border-gray-300  bg-white  p-[3px]">
-                    <p><strong>{{ user?.lname }}</strong></p>
-                    <p>Last Name</p>
-                    </div>
-                    <div class="border-[1px] border-gray-300  bg-white  p-[3px]">
-                    <p><strong>{{ user?.name }}</strong></p>
-                    <p>FirstName</p>
-                    </div>
-                    <div class="border-[1px] border-gray-300  bg-white  p-[3px]">
-                    <p><strong>{{ user?.mname || 'N/A' }}</strong></p>
-                    <p>Middle Name</p>
-                    </div>
-                </div>
-                <div class="grid grid-cols-4 text-sm text-gray-700">
-                    <div class="border-[1px] border-gray-300  bg-white  p-[3px]">
-                    <p><strong>{{ user?.course_year || 'N/A' }}</strong></p>
-                    <p>If Student, Course, and Year</p>
-                    </div>
-                    <div class="border-[1px] border-gray-300  bg-white  p-[3px]">
-                    <p><strong>{{ new Date(user?.date_of_birth).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) || 'N/A' }}</strong></p>
-                    <p>Date of Birth</p>
-                    </div>
-                    <div class="border-[1px] border-gray-300  bg-white  p-[3px]">
-                    <p><strong>{{ user?.age }}</strong></p>
-                    <p>Age</p>
-                    </div>
-                    <div class="border-[1px] border-gray-300  bg-white  p-[3px]">
-                    <p><strong>{{ user?.gender }}</strong></p>
-                    <p>Gender</p>
-                    </div>
-                </div>
-                <div class="grid grid-cols-2 text-sm text-gray-700">
-                    <div class="border-[1px] border-gray-300  bg-white  p-[3px]">
-                    <p><strong>{{ user?.position || 'N/A' }}</strong></p>
-                    <p>If Employee, Position</p>
-                    </div>
-                    <div class="border-[1px] border-gray-300  bg-white  p-[3px]">
-                    <p><strong>{{ user?.civil_status }}</strong></p>
-                    <p>Civil Status</p>
-                    </div>
-                </div>
-                <div class="grid grid-cols-3 text-sm text-gray-700">
-                    <div class="border-[1px] col-span-2 border-gray-300  bg-white  p-[3px]">
-                    <p><strong>{{ user?.address || 'N/A' }}</strong></p>
-                    <p>Home Address.</p>
-                    </div>
-                    <div class="border-[1px] border-gray-300  bg-white  p-[3px]">
-                    <p><strong>{{ user?.contact_no || 'N/A' }}</strong></p>
-                    <p>Contact no.</p>
-                    </div>
-                </div>
-                <div class="grid grid-cols-3 text-sm text-gray-700">
-                    <div class="border-[1px] col-span-2 border-gray-300  bg-white  p-[3px]">
-                    <p><strong>{{ user?.emergency_name || 'N/A' }}</strong></p>
-                    <p>In case of emergency, notify</p>
-                    </div>
-                    <div class="border-[1px] border-gray-300  bg-white  p-[3px]">
-                    <p><strong>{{ user?.emergency_contact_no || 'N/A' }}</strong></p>
-                    <p>Contact no.</p>
-                    </div>
-                </div>
-                <div class="grid grid-cols-3 text-sm text-gray-700">
-                    <div class="border-[1px] col-span-2 border-gray-300  bg-white  p-[3px]">
-                    <p><strong>{{ user?.emergency_address || 'N/A' }}</strong></p>
-                    <p>Address</p>
-                    </div>
-                    <div class="border-[1px] border-gray-300  bg-white  p-[3px]">
-                    <p><strong>{{ user?.emergency_relationship || 'N/A' }}</strong></p>
-                    <p>Relationship</p>
-                    </div>
-                </div>
-                    <table class="table-auto w-full ">
-                    <thead class="border-[1px] border-gray-300 ">
+        <!-- Second column: span 9 -->
+        <div class="py-6 col-span-9">
+        <div class="mx-auto space-y-6" id="report-content">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-3 rounded-lg">
+            <div class="overflow-x-auto">
+                <table class="table-auto w-full">
+                    <thead class="border-[1px] border-gray-300">
                         <tr class="bg-gray-100 rounded-lg">
                         <th class="px-4 py-2 text-left">Date</th>
                         <th class="px-4 py-2 text-left">Chief Complaints</th>
@@ -139,18 +39,35 @@
                         </tr>
                     </thead>
                     <tbody class="text-gray-700">
-                        <tr v-for="(record, index) in records" :key="index" class="border border-gray-200 hover:bg-gray-100 text-sm">
-                            <td class="px-4 py-2 ">{{ new Date(record?.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) || 'N/A' }}</td>
-                            <td class="px-4 py-2 border-l border-gray-200 ">{{ record.chief_complaints }}</td> 
-                            <td class="px-4 py-2 border-l border-gray-200">{{ record.vital_signs }}</td>
-                            <td class="px-4 py-2 border-l border-gray-200">{{ record.diagnosis }}</td>
-                            <td class="px-4 py-2 border-l border-gray-200">{{ record.management }}</td>
+                        <!-- Display records if available -->
+                        <tr 
+                        v-if="records.length > 0"
+                        v-for="(record, index) in records"
+                        :key="index"
+                        class="border border-gray-200 hover:bg-gray-100 text-sm"
+                        >
+                        <td class="px-4 py-2">
+                            {{ new Date(record?.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) || 'N/A' }}
+                        </td>
+                        <td class="px-4 py-2 border-l border-gray-200">{{ record.chief_complaints }}</td>
+                        <td class="px-4 py-2 border-l border-gray-200">{{ record.vital_signs }}</td>
+                        <td class="px-4 py-2 border-l border-gray-200">{{ record.diagnosis }}</td>
+                        <td class="px-4 py-2 border-l border-gray-200">{{ record.management }}</td>
+                        </tr>
+
+                        <!-- No records found -->
+                        <tr v-else>
+                        <td colspan="5" class="text-center py-4 text-gray-500 text-lg font-medium">
+                            <i class="fas fa-exclamation-circle text-red-500 mr-2"></i> <!-- Font Awesome Icon -->
+                            No records found
+                        </td>
                         </tr>
                     </tbody>
-                    </table>
-                </div>
-                </div>
+                </table>
             </div>
+            </div>
+        </div>
+        </div>
         </div>
     </UserLayout>
     </div>

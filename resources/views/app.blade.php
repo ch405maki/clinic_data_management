@@ -12,6 +12,8 @@
 
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
+        <script src="//cdn.ckeditor.com/4.25.0-lts/standard/ckeditor.js"></script>
+
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 

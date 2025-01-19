@@ -21,37 +21,49 @@
             <div class="mx-auto space-y-6 " id="report-content">
                 <main class="flex-grow">
                     <div class="flex flex-col md:flex-row w-full justify-center">
-                        <div class="w-full">
-                            <div class=" px-16 py-16 rounded-lg relative overflow-hidden">
-                                <h1 class="text-center mb-8 font-bold text-xl leading-tight">
-                                    Republic of the Philippines
-                                    <br />
-                                    Kalinga State University
-                                    <br />
-                                    Bulanao, Tabuk City, Kalinga 
-                                    <br />
-                                    Health Services Office
-                                </h1>
-                                <h1 class="text-center underline font-bold text-xl mb-6">MEDICAL CERTIFICATE</h1>
-                                <h1 class="text-right text-lg mb-6">Date: <span class="underline">{{ new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) }}</span></h1>
-                                <p class="mb-4 indent-8">
-                                    This is to certify that Mr /Miss <span class="uppercase font-bold underline mx-2">{{ record.patient.name }}, {{ record.patient.lname }}</span> came here at the Clinic on
-                                    <span class="uppercase font-bold underline mx-2">
-                                        {{ new Date(record?.date).toLocaleDateString('en-US', {
-                                            year: 'numeric',
-                                            month: 'long',
-                                            day: 'numeric',
-                                            }) || 'N/A' }}
-                                    </span>. Due to<span class="uppercase font-bold underline mx-2"> {{ record.chief_complaints }}</span> He / She <span class="uppercase font-bold underline mx-2">{{ record.diagnosis }}</span> 
-                                </p>
-                                <p class="mb-4 indent-8">This certification is issued for whatever legal intent it may serve.</p>
-                                <p class="indent-8 mb-8">Given this {{ new Date().getDate() }} day of {{ new Date().toLocaleString('default', { month: 'long' }) }} {{ new Date().getFullYear() }}</p>
-                                <div class="text-right mb-8">
-                                    <h1 class="underline text-lg font-bold">Cesaria D. Mendoza, M.D.</h1>
-                                    <h1 class="italic">School Physician</h1>
-                                </div>
-                            </div>
+                        <div class="px-16 py-16 rounded-lg relative overflow-hidden">
+                        <!-- Header Section -->
+                        <div class="flex items-center justify-left ml-[195px] mb-8">
+                            <!-- Logo -->
+                            <img src="/images/logo.png" class="h-24 w-auto mr-4" alt="KSU Logo">
+                            <!-- Header Text -->
+                            <h1 class="text-center font-bold text-xl leading-tight">
+                            Republic of the Philippines
+                            <br />
+                            Kalinga State University
+                            <br />
+                            Bulanao, Tabuk City, Kalinga
+                            <br />
+                            Health Services Office
+                            </h1>
                         </div>
+                        <!-- Title -->
+                        <h1 class="text-center underline font-bold text-xl mb-6">MEDICAL CERTIFICATE</h1>
+                        <!-- Date -->
+                        <h1 class="text-right text-lg mb-6">
+                            Date: <span class="underline">{{ new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) }}</span>
+                        </h1>
+                        <!-- Body Text -->
+                        <p class="mb-4 indent-8">
+                            This is to certify that Mr/Miss 
+                            <span class="uppercase font-bold underline mx-2">{{ record.patient.name }}, {{ record.patient.lname }}</span>
+                            came here at the Clinic on
+                            <span class="uppercase font-bold underline mx-2">
+                            {{ new Date(record?.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) || 'N/A' }}
+                            </span>. Due to
+                            <span class="uppercase font-bold underline mx-2">{{ record.chief_complaints }}</span>,
+                            He/She 
+                            <span class="uppercase font-bold underline mx-2">{{ record.diagnosis }}</span>.
+                        </p>
+                        <p class="mb-4 indent-8">This certification is issued for whatever legal intent it may serve.</p>
+                        <p class="indent-8 mb-8">Given this {{ new Date().getDate() }} day of {{ new Date().toLocaleString('default', { month: 'long' }) }} {{ new Date().getFullYear() }}</p>
+                        <!-- Footer -->
+                        <div class="text-right mb-8">
+                            <h1 class="underline text-lg font-bold">Cesaria D. Mendoza, M.D.</h1>
+                            <h1 class="italic">School Physician</h1>
+                        </div>
+                        </div>
+
                     </div>
             </main>
             </div>

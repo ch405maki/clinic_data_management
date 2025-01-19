@@ -17,6 +17,7 @@ class IndividualRecord extends Model
         'vital_signs',
         'diagnosis',
         'management',
+        'status',
     ];
 
     protected $dates = ['created_at', 'updated_at'];
@@ -33,5 +34,10 @@ class IndividualRecord extends Model
         }
 
         return $query->where('patient_id', Auth::id());
+    }
+
+    public function scopePendingWithPatients($query)
+    {
+        return $query->where('status', 'pending')->with('patient');
     }
 }

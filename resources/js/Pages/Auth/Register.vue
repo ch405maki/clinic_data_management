@@ -10,6 +10,22 @@
         </div>
 
         <form @submit.prevent="submit">
+
+            <!-- Position -->
+            <div class="mt-4 mb-4">
+                <InputLabel for="selector" value="Position" />
+                <select
+                    id="selector"
+                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-royal-purple-500 focus:border-royal-purple-500 sm:text-sm"
+                    v-model="form.selector"
+                >
+                    <option value="">Select a position</option>
+                    <option value="Student">Student</option>
+                    <option value="Employee">Employee</option>
+                </select>
+                <InputError class="mt-2" :message="form.errors.selector" />
+            </div>  
+
             <!-- Name Input -->
             <div class="sm:col-span-12 mt-4">
                 <InputLabel for="name" value="Name" />
@@ -67,7 +83,7 @@
             </div>
             
             <!-- Course Year Input -->
-            <div class="sm:col-span-12 mt-4">
+            <div v-if="form.selector === 'Student'" class="sm:col-span-12 mt-4">
                 <InputLabel for="course_year" value="Course Year if Student" />
                 <TextInput
                     id="course_year"
@@ -83,26 +99,28 @@
             <div class="sm:col-span-12 mt-4">
                 <InputLabel for="date_of_birth" value="Date of Birth" />
                 <TextInput
-                    id="date_of_birth"
-                    v-model="form.date_of_birth"
-                    required
-                    type="date"
-                    class="mt-1 block w-full border border-gray-300 rounded-lg "
-                    placeholder="Date of Birth Here..."
+                id="date_of_birth"
+                v-model="form.date_of_birth"
+                @input="calculateAge"
+                required
+                type="date"
+                class="mt-1 block w-full border border-gray-300 rounded-lg "
+                placeholder="Date of Birth Here..."
                 />
                 <InputError class="mt-2" :message="form.errors.date_of_birth" />
             </div>
 
             <!-- Age Input -->
-            <div class="sm:col-span-12 mt-4">
+            <div class="sm:col-span-12 mt-4 hidden">
                 <InputLabel for="age" value="Age" />
                 <TextInput
-                    id="age"
-                    v-model="form.age"
-                    required
-                    type="number"
-                    class="mt-1 block w-full border border-gray-300 rounded-lg "
-                    placeholder="Age Here..."
+                id="age"
+                v-model="form.age"
+                required    
+                type="number"
+                class="mt-1 block w-full border border-gray-300 rounded-lg "
+                placeholder="Age Here..."
+                readonly
                 />
                 <InputError class="mt-2" :message="form.errors.age" />
             </div>
@@ -123,7 +141,7 @@
             </div>
 
             <!-- Position Input -->
-            <div class="sm:col-span-12 mt-4">
+            <div v-if="form.selector === 'Employee'" class="sm:col-span-12 mt-4">
                 <InputLabel for="position" value="Position if Employed" />
                 <TextInput
                     id="position"
@@ -148,7 +166,6 @@
                     <option value="Divorced">Divorced</option>
                 </select>
             </div>
-
 
             <!-- Address Input -->
             <div class="sm:col-span-12 mt-4">
@@ -175,58 +192,6 @@
                     placeholder="Contact No Here..."
                 />
                 <InputError class="mt-2" :message="form.errors.contact_no" />
-            </div>
-
-            <!-- Emergency Name Input -->
-            <div class="sm:col-span-12 mt-4">
-                <InputLabel for="emergency_name" value="Emergency Name" />
-                <TextInput
-                    id="emergency_name"
-                    v-model="form.emergency_name"
-                    required
-                    type="text"
-                    class="mt-1 block w-full border border-gray-300 rounded-lg "
-                    placeholder="Emergency Name Here..."
-                />
-            </div>
-
-            <!-- Emergency Relationship Input -->
-            <div class="sm:col-span-12 mt-4">
-                <InputLabel for="emergency_relationship" value="Emergency Relationship" />
-                <TextInput
-                    id="emergency_relationship"
-                    v-model="form.emergency_relationship"
-                    required
-                    type="text"
-                    class="mt-1 block w-full border border-gray-300 rounded-lg "
-                    placeholder="Emergency Relationship Here..."
-                />
-            </div>
-
-            <!-- Emergency Address Input -->
-            <div class="sm:col-span-12 mt-4">
-                <InputLabel for="emergency_address" value="Emergency Address" />
-                <TextInput
-                    id="emergency_address"
-                    v-model="form.emergency_address"
-                    required
-                    type="text"
-                    class="mt-1 block w-full border border-gray-300 rounded-lg "
-                    placeholder="Emergency Address Here..."
-                />
-            </div>
-
-            <!-- Emergency Contact No Input -->
-            <div class="sm:col-span-12 mt-4">
-                <InputLabel for="emergency_contact_no" value="Emergency Contact No" />
-                <TextInput
-                    id="emergency_contact_no"
-                    v-model="form.emergency_contact_no"
-                    required
-                    type="text"
-                    class="mt-1 block w-full border border-gray-300 rounded-lg "
-                    placeholder="Emergency Contact No Here..."
-                />
             </div>
 
             <!-- Profile Picture -->
@@ -385,12 +350,13 @@ const showPassword = ref(false);
     }
 
     const passwordValid = ref({
-    length: false,
-    uppercase: false,
-    lowercase: false,
-    number: false,
-    special: false,
+        length: false,
+        uppercase: false,
+        lowercase: false,
+        number: false,
+        special: false,
     });
+
     const passwordMatch = ref(true);
 
     function validatePassword() {
@@ -406,39 +372,56 @@ const showPassword = ref(false);
         passwordMatch.value = form.password === form.password_confirmation;
     }
 
-const form = useForm({
-    name: '',
-    mname: '',
-    lname: '',
-    email: '',
-    password: '',
-    password_confirmation: '',
-    role: 'Patient', 
-    course_year: '',
-    date_of_birth: '',
-    age: '',
-    gender: '',
-    position: '',
-    civil_status: '',
-    address: '',
-    contact_no: '',
-    emergency_name: '',
-    emergency_relationship: '',
-    emergency_address: '',
-    emergency_contact_no: '',
-    profile_picture: null, 
-});
+    function calculateAge() {
+    if (form.date_of_birth) {
+        const dob = new Date(form.date_of_birth);
+        const today = new Date();
+        const age = today.getFullYear() - dob.getFullYear();
+        const m = today.getMonth() - dob.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+        form.age = age - 1;
+        } else {
+        form.age = age;
+        }
+    } else {
+        form.age = '';
+    }
+    }
 
-const submit = () => {
-    form.post(route('register'), {
-        onFinish: () => form.reset('password', 'password_confirmation'),
+    const form = useForm({
+        name: '',
+        mname: '',
+        lname: '',
+        email: '',
+        password: '',
+        password_confirmation: '',
+        role: 'Patient', 
+        course_year: '',
+        date_of_birth: '',
+        age: '',
+        gender: '',
+        position: '',
+        civil_status: '',
+        address: '',
+        contact_no: '',
+        emergency_name: '',
+        emergency_relationship: '',
+        emergency_address: '',
+        emergency_contact_no: '',
+        profile_picture: null, 
+        selector: '',
     });
-};
 
-const previewImage = ref(null);
+    const submit = () => {
+        form.post(route('register'), {
+            onFinish: () => form.reset('password', 'password_confirmation'),
+        });
+    };
 
-const handleFileChange = (e) => {
-  form.profile_picture = e.target.files[0];
-  previewImage.value = URL.createObjectURL(e.target.files[0]);
-};
+    const previewImage = ref(null);
+
+    const handleFileChange = (e) => {
+    form.profile_picture = e.target.files[0];
+    previewImage.value = URL.createObjectURL(e.target.files[0]);
+    };
 </script>
