@@ -12,10 +12,10 @@ class CreateIndividualRecordsTable extends Migration
             $table->id();
             $table->foreignId('patient_id')->constrained('users')->onDelete('cascade');
             $table->date('date');
-            $table->text('chief_complaints');
+            $table->text('chief_complaints')->nullable();
             $table->text('vital_signs');
-            $table->text('diagnosis');
-            $table->text('management');
+            $table->text('diagnosis')->nullable();
+            $table->text('management')->nullable();
             $table->timestamps();
         });
     }

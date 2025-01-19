@@ -97,18 +97,22 @@
                     <i class="fa-solid fa-house-chimney mr-2"></i>
                     <span class="truncate">Dashboard</span>
                   </a>
-                  <a :href="route('vital.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
-                    <i class="fa-solid fa-notes-medical mr-2"></i>
-                    <span class="truncate">Vital Sign</span>
-                  </a>
-                  <a :href="route('diagnose.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
-                    <i class="fa-solid fa-notes-medical mr-2"></i>
-                    <span class="truncate">Diagnose</span>
-                  </a>
-                  <a :href="route ('certificate.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
-                    <i class="fa-solid fa-prescription mr-2"></i>
-                    <span class="truncate">Medical Cerificate</span>
-                  </a>
+                  <div v-if="user.role === 'Nurse'">
+                    <a :href="route('vital.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
+                      <i class="fa-solid fa-notes-medical mr-2"></i>
+                      <span class="truncate">Vital Sign</span>
+                    </a>
+                  </div>
+                  <div v-if="user.role === 'Doctor'">
+                    <a :href="route('diagnose.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
+                      <i class="fa-solid fa-notes-medical mr-2"></i>
+                      <span class="truncate">Diagnose</span>
+                    </a>
+                    <a :href="route ('certificate.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
+                      <i class="fa-solid fa-prescription mr-2"></i>
+                      <span class="truncate">Medical Cerificate</span>
+                    </a>
+                  </div>
                   <a :href="route ('report.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
                     <i class="fa-solid fa-folder-open mr-2"></i>
                     <span class="truncate">Reports</span>

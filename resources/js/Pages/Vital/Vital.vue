@@ -74,23 +74,24 @@
                 
 
                 <form @submit.prevent="saveDiagnostic" class="space-y-4">
-                  <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2"><span class="text-red-500">*</span> Vital Signs</label>
-                    <textarea
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 mb-2">
+                        <span class="text-red-500">*</span> Vital Signs
+                      </label>
+                      <textarea
                         v-model="form.vital_signs"
                         rows="4"
                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
                         placeholder="Record temperature, blood pressure, pulse, oxygen saturation, etc."
-                    ></textarea>
-                </div>
-
+                      ></textarea>
+                    </div>
 
                 <div class="text-center">
                     <button
                         type="submit"
                         class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 mt-6 rounded"
                     >
-                        Submit Diagnostic
+                        Submit Vitals
                     </button>
                 </div>
             </form>
@@ -122,7 +123,7 @@ const form = useForm({
   patient_id: props.user.id, // Automatically associate with the user
   date: new Date().toISOString().split("T")[0], // Default to today's date
   chief_complaints: "",
-  vital_signs: "",
+  vital_signs: "Heart rate:  \nBlood pressure:  ",
   diagnosis: "",
   management: "",
   status: "pending",

@@ -14,13 +14,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // Admin
-        User::create([
-            'name' => 'Admin User',
-            'email' => 'admin@mail.com',
-            'password' => Hash::make('password'),
-            'role' => 'Admin',
-        ]);
 
         // Doctor
         User::create([
