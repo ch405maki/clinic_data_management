@@ -131,7 +131,7 @@ const form = useForm({
 
 // Save function
 const saveDiagnostic = () => {
-  form.post(route("diagnose.store"), {
+  form.post(route("diagnose.store_vital"), {
     onSuccess: () => {
       Swal.fire("Success", "Diagnostic record saved successfully.", "success");
     },

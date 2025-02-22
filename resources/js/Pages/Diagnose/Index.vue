@@ -4,7 +4,7 @@
       <template #header>
         <div class="flex justify-between items-center">
           <!-- Title -->
-          <h2 class="font-semibold text-xl text-gray-800 leading-tight">Make Diagnostic</h2>
+          <h2 class="font-semibold lg:text-xl md:text-lg text-sm text-gray-800 leading-tight">Make Diagnostic</h2>
           <!-- Search Input -->
           <div class="flex items-center">
             <div class="relative text-gray-500 focus-within:text-gray-900">

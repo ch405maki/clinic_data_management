@@ -5,7 +5,7 @@
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">Patient Management</h2>
         </template>
-        <div class="flex flex-col min-h-screen bg-gray-100 dark:bg-gray-900">
+        <div class="flex flex-col min-h-screen bg-gray-100">
             <main class="flex-grow">
                 <div class="max-w-7xl mx-auto">
                     <div class="flex flex-col md:flex-row w-full justify-center">
@@ -143,29 +143,33 @@
                                     </div>
 
                                     <!-- Date of Birth Input -->
-                                    <div class="sm:col-span-12">
+                                    <div class="sm:col-span-12 mt-4">
                                         <InputLabel for="date_of_birth" value="Date of Birth" />
                                         <TextInput
-                                            id="date_of_birth"
-                                            v-model="form.date_of_birth"
-                                            required
-                                            type="date"
-                                            class="mt-1 block w-full border border-gray-300 rounded-lg "
-                                            placeholder="Date of Birth Here..."
+                                        id="date_of_birth"
+                                        v-model="form.date_of_birth"
+                                        @input="calculateAge"
+                                        required
+                                        type="date"
+                                        class="mt-1 block w-full border border-gray-300 rounded-lg "
+                                        placeholder="Date of Birth Here..."
                                         />
+                                        <InputError class="mt-2" :message="form.errors.date_of_birth" />
                                     </div>
 
                                     <!-- Age Input -->
-                                    <div class="sm:col-span-12">
+                                    <div class="sm:col-span-12 mt-4 hidden">
                                         <InputLabel for="age" value="Age" />
                                         <TextInput
-                                            id="age"
-                                            v-model="form.age"
-                                            required
-                                            type="number"
-                                            class="mt-1 block w-full border border-gray-300 rounded-lg "
-                                            placeholder="Age Here..."
+                                        id="age"
+                                        v-model="form.age"
+                                        required    
+                                        type="number"
+                                        class="mt-1 block w-full border border-gray-300 rounded-lg "
+                                        placeholder="Age Here..."
+                                        readonly
                                         />
+                                        <InputError class="mt-2" :message="form.errors.age" />
                                     </div>
 
                                     <!-- Gender Input -->
@@ -343,6 +347,22 @@ const form = useForm({
     emergency_address: '',
     emergency_contact_no: '',
 });
+
+function calculateAge() {
+    if (form.date_of_birth) {
+        const dob = new Date(form.date_of_birth);
+        const today = new Date();
+        const age = today.getFullYear() - dob.getFullYear();
+        const m = today.getMonth() - dob.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+        form.age = age - 1;
+        } else {
+        form.age = age;
+        }
+    } else {
+        form.age = '';
+    }
+    }
 
 const selectedUser = ref(null);
 

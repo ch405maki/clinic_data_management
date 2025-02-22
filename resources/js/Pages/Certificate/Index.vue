@@ -5,7 +5,7 @@
         <template #header>
           <div class="flex justify-between items-center">
             <!-- Heading Section -->
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            <h2 class="font-semibold lg:text-xl md:text-lg text-sm text-gray-800 leading-tight">
                 Medical Certificate
             </h2>
             <div class="flex items-center">

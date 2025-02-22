@@ -76,7 +76,11 @@
             <!-- Mobile Menu -->
             <nav v-if="isMenuOpen" class="lg:hidden" aria-label="Global" @click.away="isMenuOpen = false">
               <div class="mx-auto max-w-3xl space-y-1 px-2 pt-2 pb-3 sm:px-4">
-                <a href="#" class="bg-gray-100 text-gray-900 block rounded-md py-2 px-3 text-base font-medium">Home</a>
+                <a :href="route ('dashboard')" class="text-gray-900 block rounded-md py-2 px-3 text-base font-medium">My Record</a>
+                <div class="mt-8 border-t" aria-labelledby="account-headline">
+                <a :href="route('profile.edit')" class="hover:bg-gray-50 text-gray-500 hover:text-gray-600 block rounded-md py-2 px-3 text-base font-medium">Profile</a>
+                <a :href="route('logout')" class="hover:bg-gray-50 block text-gray-500 hover:text-gray-600 rounded-md py-2 px-3 text-base font-medium">Sign out</a>
+              </div>
               </div>
             </nav>
           </header>

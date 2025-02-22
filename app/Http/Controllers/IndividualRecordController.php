@@ -64,6 +64,22 @@ class IndividualRecordController extends Controller
         return redirect()->route('diagnose.index')->with('success', 'Diagnostic record created successfully.');
     }
 
+    public function store_vital(Request $request)
+    {
+        $validated = $request->validate([
+            'patient_id' => 'required|exists:users,id',
+            'date' => 'required|date',
+            'chief_complaints' => 'nullable|string',
+            'vital_signs' => 'nullable|string',
+            'diagnosis' => 'nullable|string',
+            'management' => 'nullable|string',
+        ]);
+
+        IndividualRecord::create($validated);
+
+        return redirect()->route('vital.index')->with('success', 'Diagnostic record created successfully.');
+    }
+
     public function edit($id)
     {
         $record = IndividualRecord::with('patient')->findOrFail($id);

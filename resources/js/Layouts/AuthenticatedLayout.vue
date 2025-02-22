@@ -76,7 +76,31 @@
           <!-- Mobile Menu -->
           <nav v-if="isMenuOpen" class="lg:hidden" aria-label="Global" @click.away="isMenuOpen = false">
             <div class="mx-auto max-w-3xl space-y-1 px-2 pt-2 pb-3 sm:px-4">
-              <a href="#" class="bg-gray-100 text-gray-900 block rounded-md py-2 px-3 text-base font-medium">Home</a>
+              <!-- admin -->
+              <div v-if="user.role === 'Doctor'">
+                <a :href="route ('dashboard')" class="text-gray-900 block rounded-md py-2 px-3 text-base font-medium">Dashboard</a>
+                <a :href="route('diagnose.index')" class="text-gray-900 block rounded-md py-2 px-3 text-base font-medium">Diagnose</a>
+                <a :href="route ('certificate.index')" class="text-gray-900 block rounded-md py-2 px-3 text-base font-medium">Med. Certificate</a>
+                <a :href="route ('report.index')" class="text-gray-900 block rounded-md py-2 px-3 text-base font-medium">Report</a>
+                
+                <a :href="route('nurse.index')" class="border-t text-gray-900 block rounded-md py-2 px-3 text-base font-medium">Manage Nurse</a>
+                <a :href="route('patient.index')" class="text-gray-900 block rounded-md py-2 px-3 text-base font-medium">Manage Patient</a>
+              </div>
+              <!-- nurse -->
+              <div v-if="user.role === 'Nurse'">
+                <a :href="route ('dashboard')" class="text-gray-900 block rounded-md py-2 px-3 text-base font-medium">Dashboard</a>
+                <a :href="route ('vital.index')"class="border-t text-gray-900 block rounded-md py-2 px-3 text-base font-medium">Vital's</a>
+                <a :href="route ('patient.index')"class="border-t text-gray-900 block rounded-md py-2 px-3 text-base font-medium">Manage Patient's</a>
+                <a :href="route ('report.index')" class="border-t text-gray-900 block rounded-md py-2 px-3 text-base font-medium">Reports</a>
+              </div>
+              <!-- patient -->
+              <div v-if="user.role === 'Patient'">
+                <a :href="route ('dashboard')" class="text-gray-900 block rounded-md py-2 px-3 text-base font-medium">My Record</a>
+              </div>
+              <div class="mt-8 border-t" aria-labelledby="account-headline">
+                <a :href="route('profile.edit')" class="hover:bg-gray-50 text-gray-500 hover:text-gray-600 block rounded-md py-2 px-3 text-base font-medium">Profile</a>
+                <a :href="route('logout')" class="hover:bg-gray-50 block text-gray-500 hover:text-gray-600 rounded-md py-2 px-3 text-base font-medium">Sign out</a>
+              </div>
             </div>
           </nav>
         </header>

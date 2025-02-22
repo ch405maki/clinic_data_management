@@ -31,7 +31,7 @@ const submit = () => {
 </script>
 
 <template>
-    <GuestLayout class="bg-cover py-10 rounded-lg bg-center bg-no-repeat" style="background-image: url('/images/bg4.jpg');">
+    <GuestLayout class="bg-cover py-10 px-4 rounded-lg bg-center bg-no-repeat" style="background-image: url('/images/bg4.jpg');">
         <Head title="Log in" />
 
         <div v-if="status" class="mb-4 font-medium text-sm text-green-600">

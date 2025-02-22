@@ -55,6 +55,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/diagnose', [IndividualRecordController::class, 'index'])->name('diagnose.index');
     Route::get('/diagnose/{user}', [IndividualRecordController::class, 'create'])->name('diagnose.create');
     Route::post('/diagnose', [IndividualRecordController::class, 'store'])->name('diagnose.store');
+    Route::post('/diagnose', [IndividualRecordController::class, 'store_vital'])->name('diagnose.store_vital');
 
     Route::get('/update-diagnostic/{id}', [IndividualRecordController::class, 'edit'])->name('diagnostics.edit');
     Route::put('/update-diagnostic/{id}', [IndividualRecordController::class, 'update'])->name('diagnostics.update');
