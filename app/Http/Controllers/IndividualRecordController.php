@@ -19,8 +19,8 @@ class IndividualRecordController extends Controller
 
     public function index()
     {
-        $individualRecords = IndividualRecord::pendingWithPatients()->get();
-
+        $individualRecords = IndividualRecord::pendingWithPatients()->latest()->get();
+    
         return Inertia::render('Diagnose/Index', [
             'individualRecords' => $individualRecords,
         ]);

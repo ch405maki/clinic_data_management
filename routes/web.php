@@ -55,9 +55,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/diagnose', [IndividualRecordController::class, 'index'])->name('diagnose.index');
     Route::get('/diagnose/{user}', [IndividualRecordController::class, 'create'])->name('diagnose.create');
     Route::post('/diagnose', [IndividualRecordController::class, 'store'])->name('diagnose.store');
-    Route::post('/diagnose', [IndividualRecordController::class, 'store_vital'])->name('diagnose.store_vital');
 
+    
     Route::get('/update-diagnostic/{id}', [IndividualRecordController::class, 'edit'])->name('diagnostics.edit');
+    Route::post('/diagnose', [IndividualRecordController::class, 'store_vital'])->name('diagnose.store_vital');
     Route::put('/update-diagnostic/{id}', [IndividualRecordController::class, 'update'])->name('diagnostics.update');
 
     Route::get('/vital', [IndividualRecordController::class, 'vitalIndex'])->name('vital.index');
@@ -84,5 +85,14 @@ Route::get('/login', function() {
     return view('auth.login');
 })->name('login');
 
+// USE THIS FOR SHARED HOSTING...
+// IMPORTANT REMINDER CHECK THE FOLDER PERMITON SET TO '0755'
+Route::get('/storage-link', function() {
+    $targetFolder = storage_path('app/public');
+    $linkFolder = $_SERVER['DOCUMENT_ROOT'] . '/storage';
+    symlink($targetFolder, $linkFolder);
+
+    return 'Storage link created!';
+});
 
 require __DIR__.'/auth.php';
