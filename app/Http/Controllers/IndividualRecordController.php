@@ -29,12 +29,15 @@ class IndividualRecordController extends Controller
 
     public function vitalIndex()
     {
-        $users = User::where('role', self::ROLES['Patient'])->get();
-
+        $users = User::where('role', self::ROLES['Patient'])
+                     ->where('status', 'active') // Only get active users
+                     ->get();
+    
         return Inertia::render('Vital/Index', [
             'users' => $users,
         ]);
     }
+    
 
     public function create(User $user)
     {
@@ -65,20 +68,32 @@ class IndividualRecordController extends Controller
     }
 
     public function store_vital(Request $request)
-    {
-        $validated = $request->validate([
-            'patient_id' => 'required|exists:users,id',
-            'date' => 'required|date',
-            'chief_complaints' => 'nullable|string',
-            'vital_signs' => 'nullable|string',
-            'diagnosis' => 'nullable|string',
-            'management' => 'nullable|string',
-        ]);
+{
+    // Combine all individual vital sign inputs into one string
+    $request->merge([
+        'vital_signs' => "Weight: {$request->weight} kg\n".
+                         "Height: {$request->height} cm\n".
+                         "Blood Pressure: {$request->blood_pressure}\n".
+                         "Heart Rate: {$request->heart_rate} bpm\n".
+                         "Temperature: {$request->temperature} °C",
+    ]);
 
-        IndividualRecord::create($validated);
+    // Validate the merged request
+    $validated = $request->validate([
+        'patient_id' => 'required|exists:users,id',
+        'date' => 'required|date',
+        'chief_complaints' => 'nullable|string',
+        'vital_signs' => 'required|string', // Now always present
+        'diagnosis' => 'nullable|string',
+        'management' => 'nullable|string',
+    ]);
 
-        return redirect()->route('vital.index')->with('success', 'Diagnostic record created successfully.');
-    }
+    // Store in the database
+    IndividualRecord::create($validated);
+
+    return redirect()->route('vital.index')->with('success', 'Diagnostic record created successfully.');
+}
+
 
     public function edit($id)
     {

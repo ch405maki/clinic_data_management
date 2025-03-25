@@ -28,14 +28,24 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): RedirectResponse
+    public function store(LoginRequest $request)
     {
         $request->authenticate();
-
         $request->session()->regenerate();
+
+        $user = Auth::user();
+
+        if ($user->status != 'active') {
+            Auth::logout();
+
+            return Inertia::render('Auth/Checkpoint', [
+                'message' => 'Your account is pending approval.',
+            ]);
+        }
 
         return redirect()->intended(RouteServiceProvider::HOME);
     }
+
 
     /**
      * Destroy an authenticated session.

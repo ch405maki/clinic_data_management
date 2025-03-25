@@ -11,7 +11,7 @@
                 <div class="flex flex-shrink-0 items-center">
                   <div class="p-2.5 mt-1 flex items-center">
                   <Link class="flex items-center">
-                    <img src="/images/logo.png" alt="Image Logo" class="max-w-full h-full max-h-8 mr-2 transition-transform duration-300 transform hover:scale-105">
+                    <img src="/images/logo.png" alt="Image Logo" class="max-w-full h-full max-h-8 mr-2 w-4 transition-transform duration-300 transform hover:scale-105">
                   </Link>
                   <div>
                     <div class="text-invicta uppercase font-bold text-gray-700  text-sm tracking-wide leading-tight">Clinic Data Management System</div>
@@ -109,36 +109,36 @@
                 <!-- Dashboard -->
                 <div v-if="user.role === 'Patient'">
                   <a :href="route ('dashboard')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
-                    <i class="fa-solid fa-house-chimney mr-2"></i>
+                    <i class="fa-solid fa-house-chimney mr-2 w-4"></i>
                     <span class="truncate">My Record</span>
                   </a>
                 </div>
                 <div v-if="user.role != 'Patient'">
                   <a :href="route ('dashboard')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
-                    <i class="fa-solid fa-house-chimney mr-2"></i>
+                    <i class="fa-solid fa-house-chimney mr-2 w-4"></i>
                     <span class="truncate">Dashboard</span>
                   </a>
                   <div v-if="user.role === 'Nurse'">
                     <a :href="route('vital.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
-                      <i class="fa-solid fa-notes-medical mr-2"></i>
+                      <i class="fa-solid fa-notes-medical mr-2 w-4"></i>
                       <span class="truncate">Vital Sign</span>
                     </a>
                     <a :href="route ('report.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
-                      <i class="fa-solid fa-folder-open mr-2"></i>
+                      <i class="fa-solid fa-folder-open mr-2 w-4"></i>
                       <span class="truncate">Reports</span>
                     </a>
                   </div>
                   <div v-if="user.role === 'Doctor'">
                     <a :href="route('diagnose.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
-                      <i class="fa-solid fa-notes-medical mr-2"></i>
+                      <i class="fa-solid fa-notes-medical mr-2 w-4"></i>
                       <span class="truncate">Diagnose</span>
                     </a>
                     <a :href="route ('certificate.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
-                      <i class="fa-solid fa-prescription mr-2"></i>
+                      <i class="fa-solid fa-prescription mr-2 w-4"></i>
                       <span class="truncate">Medical Cerificate</span>
                     </a>
                     <a :href="route ('report.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
-                      <i class="fa-solid fa-folder-open mr-2"></i>
+                      <i class="fa-solid fa-folder-open mr-2 w-4"></i>
                       <span class="truncate">Reports</span>
                     </a>
                   </div>
@@ -146,19 +146,27 @@
 
                 <!-- User Management Links -->
                 <div v-if="user.role === 'Admin'">
+                  <a :href="route('user.request')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
+                    <i class="fa-solid fa-users-gear mr-2 w-4"></i>
+                    <span class="truncate">User Request</span>
+                  </a>
                   <div class="border-t border-gray-300 pt-4"></div>
                   <!-- Manage Users Section -->
                   <div class="text-invicta uppercase font-bold text-gray-700 text-xs tracking-wide leading-tight ml-[12px]">Manage Users</div>
                   <!-- <a :href="route('doctor.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
-                    <i class="fa-solid fa-user-doctor mr-2"></i>
+                    <i class="fa-solid fa-user-doctor mr-2 w-4"></i>
                     <span class="truncate">Doctors</span>
                   </a> -->
+                  <a :href="route('doctor.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
+                    <i class="fa-solid fa-user-nurse mr-2 w-4"></i>
+                    <span class="truncate">Doctor</span>
+                  </a>
                   <a :href="route('nurse.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
-                    <i class="fa-solid fa-user-nurse mr-2"></i>
+                    <i class="fa-solid fa-user-nurse mr-2 w-4"></i>
                     <span class="truncate">Nurses</span>
                   </a>
                   <a :href="route('patient.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
-                    <i class="fa-solid fa-users mr-2"></i>
+                    <i class="fa-solid fa-users mr-2 w-4"></i>
                     <span class="truncate">Patients</span>
                   </a>
                 </div>
@@ -167,7 +175,7 @@
                   <!-- Manage Users Section -->
                   <div class="text-invicta uppercase font-bold text-gray-700 text-xs tracking-wide leading-tight ml-[12px]">Manage Users</div>
                   <a :href="route('patient.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
-                    <i class="fa-solid fa-users mr-2"></i>
+                    <i class="fa-solid fa-users mr-2 w-4"></i>
                     <span class="truncate">Patients</span>
                   </a>
                 </div>

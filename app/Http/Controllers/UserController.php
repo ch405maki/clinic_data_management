@@ -56,6 +56,15 @@ class UserController extends Controller
         ]);
     }
 
+    public function request()
+    {
+        $users = User::where('status','pending')->get();
+
+        return Inertia::render('UserManagement/Request', [
+            'users' => $users,
+        ]);
+    }
+
 
     public function store(Request $request)
     {
@@ -122,5 +131,18 @@ class UserController extends Controller
         $user->delete();
 
         return redirect()->back()->with('success', 'User created successfully.');
+    }
+
+    public function updateStatus(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|in:active,inactive,pending',
+        ]);
+
+        $user = User::findOrFail($id);
+        $user->status = $request->status;
+        $user->save();
+
+        return response()->json(['message' => 'User status updated successfully'], 200);
     }
 }

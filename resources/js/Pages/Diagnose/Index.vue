@@ -59,9 +59,9 @@
                               <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900">{{ individualRecord.patient.gender }}</td>
                               <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900">{{ individualRecord.patient.address }}</td>
                               <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900">{{ individualRecord.patient.contact_no || 'N/A' }}</td>
-                              <td>
-                                <div
-                                  class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-white bg-orange-500 text-center">{{ individualRecord.vital_signs }}
+                              <td class="p-5 text-sm leading-6 font-medium text-white bg-orange-500 text-center break-words whitespace-normal">
+                                <div>
+                                  {{ individualRecord.vital_signs }}
                                 </div>
                               </td>
                               <td class="p-5">

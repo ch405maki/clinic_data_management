@@ -90,7 +90,7 @@
                   <label class="block text-sm font-medium text-gray-700 mb-2"><span class="text-red-500">*</span> Vital Signs</label>
                   <textarea
                     v-model="form.vital_signs"
-                    rows="4"
+                    rows="5"
                     class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300"
                     placeholder="Record temperature, blood pressure, pulse, oxygen saturation, etc."
                     readonly

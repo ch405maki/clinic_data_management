@@ -63,14 +63,16 @@
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2"><span class="text-red-500">*</span> Vital Signs</label>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        <span class="text-red-500">*</span> Vital Signs
+                    </label>
                     <textarea
                         v-model="form.vital_signs"
-                        rows="4"
+                        rows="8"
                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-                        placeholder="Record temperature, blood pressure, pulse, oxygen saturation, etc."
                     ></textarea>
                 </div>
+
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2"><span class="text-red-500">*</span> Diagnosis</label>

@@ -34,6 +34,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/doctor', [UserController::class, 'doctor'])->name('doctor.index');
     Route::get('/nurse', [UserController::class, 'nurse'])->name('nurse.index');
     Route::get('/patient', [UserController::class, 'patient'])->name('patient.index');
+    Route::get('/user/request', [UserController::class, 'request'])->name('user.request');
 
     Route::post('/users', [UserController::class, 'store'])->name('users.store');
     Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
