@@ -37,6 +37,7 @@
                             Health Services Office
                             </h1>
                         </div>
+                        
                         <!-- Title -->
                         <h1 class="text-center underline font-bold text-xl mb-6">MEDICAL CERTIFICATE</h1>
                         <!-- Date -->
@@ -59,11 +60,10 @@
                         <p class="indent-8 mb-8">Given this {{ new Date().getDate() }} day of {{ new Date().toLocaleString('default', { month: 'long' }) }} {{ new Date().getFullYear() }}</p>
                         <!-- Footer -->
                         <div class="text-right mb-8">
-                            <h1 class="underline text-lg font-bold">Cesaria D. Mendoza, M.D.</h1>
-                            <h1 class="italic">School Physician</h1>
+                            <h1 class="underline text-lg font-bold">{{ user.name }} {{ user.mname }}, {{ user.lname }}</h1>
+                            <h1 class="italic">{{ user.position }}</h1>
                         </div>
                         </div>
-
                     </div>
             </main>
             </div>

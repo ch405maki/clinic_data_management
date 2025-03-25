@@ -108,7 +108,7 @@ const form = useForm({
                 </div>
 
                 <!-- Course Year -->
-                <div>
+                <div v-if="user.role === 'Patient'">
                     <InputLabel for="course_year" value="Course Year" />
                     <TextInput
                         id="course_year"

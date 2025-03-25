@@ -77,15 +77,12 @@
           <nav v-if="isMenuOpen" class="lg:hidden" aria-label="Global" @click.away="isMenuOpen = false">
             <div class="mx-auto max-w-3xl space-y-1 px-2 pt-2 pb-3 sm:px-4">
               <!-- admin -->
-              <div v-if="user.role === 'Doctor'">
+              <div v-if="user.role === 'Doctor' ">
                 <a :href="route ('dashboard')" class="text-gray-900 block rounded-md py-2 px-3 text-base font-medium">Dashboard</a>
                 <a :href="route('diagnose.index')" class="text-gray-900 block rounded-md py-2 px-3 text-base font-medium">Diagnose</a>
                 <a :href="route ('certificate.index')" class="text-gray-900 block rounded-md py-2 px-3 text-base font-medium">Med. Certificate</a>
                 <a :href="route ('report.index')" class="text-gray-900 block rounded-md py-2 px-3 text-base font-medium">Report</a>
-                
-                <a :href="route('nurse.index')" class="border-t text-gray-900 block rounded-md py-2 px-3 text-base font-medium">Manage Nurse</a>
-                <a :href="route('patient.index')" class="text-gray-900 block rounded-md py-2 px-3 text-base font-medium">Manage Patient</a>
-              </div>
+                </div>
               <!-- nurse -->
               <div v-if="user.role === 'Nurse'">
                 <a :href="route ('dashboard')" class="text-gray-900 block rounded-md py-2 px-3 text-base font-medium">Dashboard</a>
@@ -126,6 +123,10 @@
                       <i class="fa-solid fa-notes-medical mr-2"></i>
                       <span class="truncate">Vital Sign</span>
                     </a>
+                    <a :href="route ('report.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
+                      <i class="fa-solid fa-folder-open mr-2"></i>
+                      <span class="truncate">Reports</span>
+                    </a>
                   </div>
                   <div v-if="user.role === 'Doctor'">
                     <a :href="route('diagnose.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
@@ -136,15 +137,15 @@
                       <i class="fa-solid fa-prescription mr-2"></i>
                       <span class="truncate">Medical Cerificate</span>
                     </a>
+                    <a :href="route ('report.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
+                      <i class="fa-solid fa-folder-open mr-2"></i>
+                      <span class="truncate">Reports</span>
+                    </a>
                   </div>
-                  <a :href="route ('report.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
-                    <i class="fa-solid fa-folder-open mr-2"></i>
-                    <span class="truncate">Reports</span>
-                  </a>
                 </div>
 
                 <!-- User Management Links -->
-                <div v-if="user.role === 'Doctor'">
+                <div v-if="user.role === 'Admin'">
                   <div class="border-t border-gray-300 pt-4"></div>
                   <!-- Manage Users Section -->
                   <div class="text-invicta uppercase font-bold text-gray-700 text-xs tracking-wide leading-tight ml-[12px]">Manage Users</div>

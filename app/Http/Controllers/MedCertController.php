@@ -46,11 +46,14 @@ class MedCertController extends Controller
     }
 
     public function generate($fileId)
-{
-    $individualRecord = IndividualRecord::with('patient')->find($fileId);
+    {
+        $individualRecord = IndividualRecord::with('patient')->find($fileId);
 
-    return Inertia::render('Certificate/Generate', [
-        'record' => $individualRecord,
-    ]);
-}
+        $user = Auth::user();
+
+        return Inertia::render('Certificate/Generate', [
+            'record' => $individualRecord,
+            'user' => $user,
+        ]);
+    }
 }

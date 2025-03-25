@@ -11,21 +11,6 @@
 
         <form @submit.prevent="submit">
 
-            <!-- Position -->
-            <div class="mt-4 mb-4">
-                <InputLabel for="selector" value="Position" />
-                <select
-                    id="selector"
-                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-royal-purple-500 focus:border-royal-purple-500 sm:text-sm"
-                    v-model="form.selector"
-                >
-                    <option value="">Select a position</option>
-                    <option value="Student">Student</option>
-                    <option value="Employee">Employee</option>
-                </select>
-                <InputError class="mt-2" :message="form.errors.selector" />
-            </div>  
-
             <!-- Name Input -->
             <div class="sm:col-span-12 mt-4">
                 <InputLabel for="name" value="Name" />
@@ -67,6 +52,21 @@
                 />
                 <InputError class="mt-2" :message="form.errors.lname" />
             </div>
+
+            <!-- Position -->
+            <div class="mt-4 mb-4">
+                <InputLabel for="selector" value="Position" />
+                <select
+                    id="selector"
+                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-royal-purple-500 focus:border-royal-purple-500 sm:text-sm"
+                    v-model="form.selector"
+                >
+                    <option value="">Select a position</option>
+                    <option value="Student">Student</option>
+                    <option value="Employee">Employee</option>
+                </select>
+                <InputError class="mt-2" :message="form.errors.selector" />
+            </div>  
 
             <!-- Email Input -->
             <div class="sm:col-span-12 mt-4">
@@ -206,6 +206,34 @@
                 <InputError class="mt-2" :message="form.errors.profile_picture" />
                 <img v-if="previewImage" :src="previewImage" class="w-20 h-20 object-cover">
             </div>
+
+            <!-- Emergency Input -->
+            <div class="sm:col-span-12 mt-4">
+                <h1>Emergency Contact Details</h1>
+                <InputLabel for="emergency_name" value="Emergency Name" />
+                <TextInput
+                    id="emergency_name"
+                    v-model="form.emergency_name"
+                    required
+                    type="text"
+                    class="mt-1 block w-full border border-gray-300 rounded-lg "
+                    placeholder="Emergency Name Here..."
+                />
+                <InputError class="mt-2" :message="form.errors.emergency_name" />
+            </div>
+            <div class="sm:col-span-12 mt-4">
+                <InputLabel for="emergency_contact_no" value="Emergency Name" />
+                <TextInput
+                    id="emergency_contact_no"
+                    v-model="form.emergency_contact_no"
+                    required
+                    type="text"
+                    class="mt-1 block w-full border border-gray-300 rounded-lg "
+                    placeholder="Contact No Here..."
+                />
+                <InputError class="mt-2" :message="form.errors.emergency_contact_no" />
+            </div>
+            
 
             <!-- Password -->
             <div class="mt-4">
