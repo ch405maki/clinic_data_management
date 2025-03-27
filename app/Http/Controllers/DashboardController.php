@@ -20,6 +20,7 @@ class DashboardController extends Controller
         ->get();
     $individualRecordCount = IndividualRecord::count();
     $currentUserRole = auth()->user()->role;
+    $users = User::where('status','pending')->get();
 
     if ($currentUserRole === 'Patient') {
         $records = IndividualRecord::where('patient_id', auth()->id())->get();
@@ -39,6 +40,7 @@ class DashboardController extends Controller
         'recentPatients' => $recentPatients,
         'individualRecordCount' => $individualRecordCount,
         'currentUserRole' => $currentUserRole,
+        'users' => $users,
     ]);
 }
 }

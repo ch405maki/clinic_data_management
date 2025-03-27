@@ -11,7 +11,7 @@
                 <div class="flex flex-shrink-0 items-center">
                   <div class="p-2.5 mt-1 flex items-center">
                   <Link class="flex items-center">
-                    <img src="/images/logo.png" alt="Image Logo" class="max-w-full h-full max-h-8 mr-2 w-4 transition-transform duration-300 transform hover:scale-105">
+                    <img src="/images/logo.png" alt="Image Logo" class="max-w-full h-full max-h-8 mr-2 w-8 transition-transform duration-300 transform hover:scale-105">
                   </Link>
                   <div>
                     <div class="text-invicta uppercase font-bold text-gray-700  text-sm tracking-wide leading-tight">Clinic Data Management System</div>
