@@ -86,7 +86,7 @@
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2"><span class="text-red-500">*</span> Medical Treatment</label>
+                    <label class="block text-sm font-medium text-gray-700 mb-2"><span class="text-red-500">*</span> Management</label>
                     <textarea
                         v-model="form.management"
                         rows="4"

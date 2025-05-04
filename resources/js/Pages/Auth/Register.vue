@@ -222,7 +222,7 @@
                 <InputError class="mt-2" :message="form.errors.emergency_name" />
             </div>
             <div class="sm:col-span-12 mt-4">
-                <InputLabel for="emergency_contact_no" value="Emergency Name" />
+                <InputLabel for="emergency_contact_no" value="Emergency Contact Number" />
                 <TextInput
                     id="emergency_contact_no"
                     v-model="form.emergency_contact_no"

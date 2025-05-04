@@ -81,14 +81,14 @@
                 <a :href="route ('dashboard')" class="text-gray-900 block rounded-md py-2 px-3 text-base font-medium">Dashboard</a>
                 <a :href="route('diagnose.index')" class="text-gray-900 block rounded-md py-2 px-3 text-base font-medium">Diagnose</a>
                 <a :href="route ('certificate.index')" class="text-gray-900 block rounded-md py-2 px-3 text-base font-medium">Med. Certificate</a>
-                <a :href="route ('report.index')" class="text-gray-900 block rounded-md py-2 px-3 text-base font-medium">Report</a>
+                <a :href="route ('report.index')" class="text-gray-900 block rounded-md py-2 px-3 text-base font-medium">Medical History</a>
                 </div>
               <!-- nurse -->
               <div v-if="user.role === 'Nurse'">
                 <a :href="route ('dashboard')" class="text-gray-900 block rounded-md py-2 px-3 text-base font-medium">Dashboard</a>
                 <a :href="route ('vital.index')"class="border-t text-gray-900 block rounded-md py-2 px-3 text-base font-medium">Vital's</a>
                 <a :href="route ('patient.index')"class="border-t text-gray-900 block rounded-md py-2 px-3 text-base font-medium">Manage Patient's</a>
-                <a :href="route ('report.index')" class="border-t text-gray-900 block rounded-md py-2 px-3 text-base font-medium">Reports</a>
+                <a :href="route ('report.index')" class="border-t text-gray-900 block rounded-md py-2 px-3 text-base font-medium">Medical History</a>
               </div>
               <!-- patient -->
               <div v-if="user.role === 'Patient'">
@@ -123,9 +123,13 @@
                       <i class="fa-solid fa-notes-medical mr-2 w-4"></i>
                       <span class="truncate">Vital Sign</span>
                     </a>
+                    <a :href="route('diagnose.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
+                      <i class="fa-solid fa-notes-medical mr-2 w-4"></i>
+                      <span class="truncate">Diagnose</span>
+                    </a>
                     <a :href="route ('report.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
                       <i class="fa-solid fa-folder-open mr-2 w-4"></i>
-                      <span class="truncate">Reports</span>
+                      <span class="truncate">Medical History</span>
                     </a>
                   </div>
                   <div v-if="user.role === 'Doctor'">
@@ -139,7 +143,7 @@
                     </a>
                     <a :href="route ('report.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
                       <i class="fa-solid fa-folder-open mr-2 w-4"></i>
-                      <span class="truncate">Reports</span>
+                      <span class="truncate">Medical History</span>
                     </a>
                   </div>
                 </div>
@@ -173,7 +177,7 @@
                 <div v-if="user.role === 'Nurse'">
                   <div class="border-t border-gray-300 pt-4"></div>
                   <!-- Manage Users Section -->
-                  <div class="text-invicta uppercase font-bold text-gray-700 text-xs tracking-wide leading-tight ml-[12px]">Manage Users</div>
+                  <div class="text-invicta uppercase font-bold text-gray-700 text-xs tracking-wide leading-tight ml-[12px]">Manage Patients</div>
                   <a :href="route('patient.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
                     <i class="fa-solid fa-users mr-2 w-4"></i>
                     <span class="truncate">Patients</span>

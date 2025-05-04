@@ -15,14 +15,14 @@
       <div class="hidden md:flex md:w-auto" id="navbar-default">
         <ul class="font-medium flex flex-col md:flex-row items-center justify-between p-4 md:p-0 rounded-lg md:space-x-8">
           <li>
-            <a href="/" class="block py-2 px-3 text-gray-900 bg-green-700 rounded md:bg-transparent md:text-green-700 md:p-0 dark:text-white">Home</a>
+            <a href="/" class="block py-2 px-3 text-gray-900 bg-green-700 rounded md:bg-transparent md:text-green-700 md:p-0">Home</a>
           </li>
           <template v-if="navigation.canLogin">
             <li v-if="$page.props.auth.user" class="flex">
-              <Link :href="route('dashboard')" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 dark:text-white">Dashboard</Link>
+              <Link :href="route('dashboard')" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0">Dashboard</Link>
             </li>
             <li v-else class="flex items-center space-x-4">
-              <Link :href="route('login')" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 dark:text-white">Log in</Link>
+              <Link :href="route('login')" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0">Log in</Link>
               <template v-if="navigation.canRegister">
                 <Link :href="route('register')" class="block py-3 px-6 text-white bg-green-600 rounded-full hover:bg-green-700 transition duration-300">Register</Link>
               </template>
@@ -54,7 +54,7 @@
     </div>
     <ul class="p-4 space-y-4">
       <li><a href="/" class="block py-2 px-4 rounded hover:bg-gray-100">Home</a></li>
-      <li><a :href="route('login')" class="block py-2 px-4 rounded hover:bg-gray-100">Log in</a></li>
+      <li><a :href="route('login')" class="block py-2 px-4 text-black rounded hover:bg-gray-100">Log in</a></li>
       <li><a :href="route('register')" class="block py-2 px-4 rounded bg-green-600 text-white hover:bg-green-700">Register</a></li>
     </ul>
   </aside>

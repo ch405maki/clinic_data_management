@@ -49,12 +49,15 @@ class UserController extends Controller
 
     public function patient()
     {
-        $users = User::where('role', self::ROLES['Patient'])->get();
-
+        $users = User::where('role', self::ROLES['Patient'])
+            ->where('status', 'active')
+            ->get();
+    
         return Inertia::render('UserManagement/Patient', [
             'users' => $users,
         ]);
     }
+    
 
     public function request()
     {
