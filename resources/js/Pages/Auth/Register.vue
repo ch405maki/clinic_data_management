@@ -127,7 +127,7 @@
 
             <!-- Gender Input -->
             <div class="sm:col-span-12 mt-4">
-                <label for="gender" class="block text-sm font-medium text-gray-700">Gender</label>
+                <label for="gender" class="block text-sm font-medium text-gray-700">Sex</label>
                 <select
                     id="gender"
                     v-model="form.gender"
@@ -232,6 +232,18 @@
                     placeholder="Contact No Here..."
                 />
                 <InputError class="mt-2" :message="form.errors.emergency_contact_no" />
+            </div>
+            <div class="sm:col-span-12 mt-4">
+                <InputLabel for="emergency_relationship" value="Relationship" />
+                <TextInput
+                    id="emergency_relationship"
+                    v-model="form.emergency_relationship"
+                    required
+                    type="text"
+                    class="mt-1 block w-full border border-gray-300 rounded-lg "
+                    placeholder="E.g. Mother..."
+                />
+                <InputError class="mt-2" :message="form.errors.emergency_relationship" />
             </div>
             
 

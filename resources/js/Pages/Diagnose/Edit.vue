@@ -64,7 +64,7 @@
                                     <p>{{ record.patient.age }}</p>
                                 </div>
                                 <div class="border-[1px] border-gray-300 bg-white p-2">
-                                    <p><strong>Gender:</strong></p>
+                                    <p><strong>Sex:</strong></p>
                                     <p>{{ record.patient.gender }}</p>
                                 </div>
                             </div>

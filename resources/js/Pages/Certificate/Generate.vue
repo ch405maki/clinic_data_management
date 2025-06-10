@@ -61,6 +61,7 @@
                         <!-- Footer -->
                         <div class="text-right mb-8">
                             <h1 class="underline text-lg font-bold">{{ user.name }} {{ user.mname }}, {{ user.lname }}</h1>
+                            <h1 class="text-sm italic">License Number: {{ user.license     }}</h1>
                             <h1 class="italic">{{ user.position }}</h1>
                         </div>
                         </div>

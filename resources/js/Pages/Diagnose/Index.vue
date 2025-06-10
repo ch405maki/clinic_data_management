@@ -42,7 +42,7 @@
                           <thead>
                             <tr class="bg-gray-50">
                               <th class="p-5 text-left text-sm leading-6 font-semibold text-gray-900 capitalize rounded-t-xl">Full Name</th>
-                              <th class="p-5 text-left text-sm leading-6 font-semibold text-gray-900 capitalize">Gender</th>
+                              <th class="p-5 text-left text-sm leading-6 font-semibold text-gray-900 capitalize">Sex</th>
                               <th class="p-5 text-left text-sm leading-6 font-semibold text-gray-900 capitalize">Address</th>
                               <th class="p-5 text-left text-sm leading-6 font-semibold text-gray-900 capitalize">Contact #</th>
                               <th class="p-5 text-center text-sm leading-6 font-semibold text-gray-900 capitalize">Vital Signs</th>

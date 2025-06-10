@@ -24,6 +24,7 @@ class User extends Authenticatable
         'password',
         'course_year',
         'date_of_birth',
+        'license',
         'age',
         'gender',
         'position',

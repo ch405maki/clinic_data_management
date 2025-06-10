@@ -144,14 +144,14 @@
 
                                     <!-- Gender Input -->
                                     <div class="sm:col-span-12">
-                                        <label for="gender" class="block text-sm font-medium text-gray-700">Gender</label>
+                                        <label for="gender" class="block text-sm font-medium text-gray-700">Sex</label>
                                         <select
                                             id="gender"
                                             v-model="form.gender"
                                             required
                                             class="mt-1 block w-full border border-gray-300 rounded-lg"
                                         >
-                                            <option value="">Select Gender</option>
+                                            <option value="">Select Sex</option>
                                             <option value="Male">Male</option>
                                             <option value="Female">Female</option>
                                         </select>
