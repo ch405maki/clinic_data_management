@@ -141,7 +141,7 @@
                       <i class="fa-solid fa-prescription mr-2 w-4"></i>
                       <span class="truncate">Medical Cerificate</span>
                     </a>
-                    <a :href="route ('certificate.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
+                    <a :href="route ('referrals.index')" class="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">
                       <i class="fa-solid fa-prescription mr-2 w-4"></i>
                       <span class="truncate">Referal</span>
                     </a>

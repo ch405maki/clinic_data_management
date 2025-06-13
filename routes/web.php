@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 
+use App\Http\Controllers\ReferralController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DoctorAvailabilityController;
@@ -75,6 +76,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/certificate', [MedCertController::class, 'index'])->name('certificate.index');
     Route::get('/certificate/{patientId}/history', [MedCertController::class, 'history'])->name('certificate.history');
     Route::get('/certificate/{fileId}/generate', [MedCertController::class, 'generate'])->name('certificate.generate');
+});
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/referrals', [ReferralController::class, 'index'])->name('referrals.index');
+    Route::post('/referrals', [ReferralController::class, 'store'])->name('referrals.store');
 });
 
 Route::get('/logout', function() {
