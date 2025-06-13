@@ -9,24 +9,39 @@ use Inertia\Inertia;
 
 class ReferralController extends Controller
 {
+    /** Show the list of users with “Refer” buttons */
     public function index()
     {
-        $users = User::all();
         return Inertia::render('Referrals/Index', [
-            'users' => $users,
+            'users' => User::select('id','name','lname','email','profile_picture')->get(),
         ]);
     }
 
+    /** Show the two‑column referral‑creation page */
+    public function create(User $user)   // $user == the person being referred
+    {
+        return Inertia::render('Referrals/Create', [
+            'referred' => $user,
+            'referrer' => auth()->user(),      // current logged‑in user
+        ]);
+    }
+
+    /** Persist the referral */
     public function store(Request $request)
     {
         $request->validate([
-            'referrer_id' => 'required|exists:users,id',
-            'referred_id' => 'required|exists:users,id|different:referrer_id',
-            'notes' => 'nullable|string',
+            'referred_id' => 'required|exists:users,id',
+            'notes'       => 'nullable|string',
         ]);
 
-        Referral::create($request->only('referrer_id', 'referred_id', 'notes'));
+        Referral::create([
+            'referrer_id' => auth()->id(),
+            'referred_id' => $request->referred_id,
+            'notes'       => $request->notes,
+        ]);
 
-        return redirect()->back()->with('success', 'Referral created.');
+        return redirect()
+            ->route('referrals.index')
+            ->with('success', 'Referral created successfully.');
     }
 }

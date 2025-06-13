@@ -80,6 +80,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/referrals', [ReferralController::class, 'index'])->name('referrals.index');
+    Route::get('/referrals/create/{user}', [ReferralController::class, 'create'])->name('referrals.create');
     Route::post('/referrals', [ReferralController::class, 'store'])->name('referrals.store');
 });
 

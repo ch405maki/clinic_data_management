@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { router } from '@inertiajs/vue3'
-import { useForm } from '@inertiajs/vue3'
+import { useForm, Link } from '@inertiajs/vue3'
 
 defineProps({
   users: Array
@@ -38,12 +38,12 @@ function createReferral(referrerId, referredId) {
         <div class="font-semibold">{{ user.name }} {{ user.lname }}</div>
         <div class="text-sm text-gray-600">{{ user.email }}</div>
         <div class="mt-2">
-          <button
+          <Link
+            :href="route('referrals.create', user.id)"
             class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
-            @click="createReferral(1, user.id)" 
-          >
+            >
             Refer this user
-          </button>
+            </Link>
         </div>
       </div>
     </div>
