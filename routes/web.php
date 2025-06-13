@@ -82,6 +82,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/referrals', [ReferralController::class, 'index'])->name('referrals.index');
     Route::get('/referrals/create/{user}', [ReferralController::class, 'create'])->name('referrals.create');
     Route::post('/referrals', [ReferralController::class, 'store'])->name('referrals.store');
+
+    Route::get('/users/{user}/referrals', [ReferralController::class, 'userReferrals'])
+     ->name('users.referrals');
+
+    Route::get('/my-referrals',[ReferralController::class, 'list'])->name('referrals.list');
+    Route::get('/referrals/{referral}',[ReferralController::class, 'show'])->name('referrals.show');
 });
 
 Route::get('/logout', function() {

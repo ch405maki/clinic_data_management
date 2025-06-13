@@ -10,12 +10,22 @@ use Inertia\Inertia;
 class ReferralController extends Controller
 {
     /** Show the list of users with “Refer” buttons */
+    // app/Http/Controllers/ReferralController.php
+
     public function index()
     {
+        $users = User::select('id', 'name', 'lname', 'email', 'profile_picture')
+            ->withCount([
+                // each COUNT(*) where this user is the *referred* person
+                'referralsReceived as referral_count'
+            ])
+            ->get();
+
         return Inertia::render('Referrals/Index', [
-            'users' => User::select('id','name','lname','email','profile_picture')->get(),
+            'users' => $users,
         ]);
     }
+
 
     /** Show the two‑column referral‑creation page */
     public function create(User $user)   // $user == the person being referred
@@ -43,5 +53,41 @@ class ReferralController extends Controller
         return redirect()
             ->route('referrals.index')
             ->with('success', 'Referral created successfully.');
+    }
+
+    public function list()
+    {
+        $referrals = Referral::with(['referred:id,name,lname,email,profile_picture'])
+            ->where('referrer_id', auth()->id())
+            ->latest()
+            ->get();
+
+        return Inertia::render('Referrals/List', [
+            'referrals' => $referrals,
+        ]);
+    }
+
+    /** Show a single referral */
+    public function show(Referral $referral)
+    {
+        // Optional: make sure the viewer is the owner
+        // if ($referral->referrer_id !== auth()->id()) abort(403);
+
+        return Inertia::render('Referrals/Show', [
+            'referral' => $referral->load(['referred', 'referrer']),
+        ]);
+    }
+
+    public function userReferrals(User $user)
+    {
+        $referrals = Referral::with('referrer:id,name,lname,email')
+            ->where('referred_id', $user->id)
+            ->latest()
+            ->get();
+
+        return Inertia::render('Referrals/UserList', [
+            'referred'  => $user,       // the person being viewed
+            'referrals' => $referrals,  // all referrals about them
+        ]);
     }
 }
