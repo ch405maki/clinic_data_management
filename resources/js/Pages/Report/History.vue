@@ -6,6 +6,9 @@
                 <div class="flex justify-between items-center">
                     <h2 class="font-semibold text-xl text-gray-800 leading-tight">Record of: {{ user?.lname }}, {{ user?.name }}</h2>
                     <div class="flex items-center gap-4">
+                        <button class="bg-rose-500 text-white px-4 py-2 rounded-md hover:bg-rose-600">
+                            Make Referal
+                        </button>
                         <!-- Export PDF Button -->
                         <button
                             @click="generatePDF"
@@ -169,7 +172,7 @@
     // Function to export to PDF
 
     // Function to generate PDF
-        function generatePDF() {
+    function generatePDF() {
         const element = document.querySelector('.overflow-x-auto');
         const options = {
             margin: 0.5,
