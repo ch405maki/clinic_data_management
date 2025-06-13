@@ -12,17 +12,25 @@ class ReferralController extends Controller
     /** Show the list of users with “Refer” buttons */
     // app/Http/Controllers/ReferralController.php
 
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::select('id', 'name', 'lname', 'email', 'profile_picture')
-            ->withCount([
-                // each COUNT(*) where this user is the *referred* person
-                'referralsReceived as referral_count'
-            ])
+        $search = $request->input('search');
+
+        $users = User::select('id', 'name', 'lname', 'email', 'license', 'profile_picture')
+            ->withCount(['referralsReceived as referral_count'])
+            ->when($search, function ($q) use ($search) {
+                $q->where(function ($sub) use ($search) {
+                    $sub->where('name',  'like', "%$search%")
+                        ->orWhere('lname','like', "%$search%")
+                        ->orWhere('email','like', "%$search%");
+                });
+            })
+            ->orderBy('name')
             ->get();
 
         return Inertia::render('Referrals/Index', [
-            'users' => $users,
+            'users'   => $users,
+            'filters' => [ 'search' => $search ],
         ]);
     }
 
